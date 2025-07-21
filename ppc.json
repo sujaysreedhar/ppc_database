@@ -14,6 +14,34 @@
         "quantity": 2
     },
     {
+        "id": 12,
+        "title": "Picture Postcard -  first official airmail flight from Allahabad to Naini",
+        "slug": "picture-postcard-first-official-airmail-flight-from-allahabad-to-naini",
+        "location": "Bengaluru",
+        "type": "Commemorative",
+        "region": "KA",
+        "year": 2025,
+        "description": "The Chief Postmaster of Bengaluru GPO released a Picture Postcard commemorating the first official airmail flight from Allahabad to Naini.",
+        "image": "1753104331_GkFENXPa0AAMnvB.jpg",
+        "origin": "India",
+        "source": "Thejas - BLR GPO",
+        "quantity": 2
+    },
+    {
+        "id": 11,
+        "title": "Picture Postcard - Shux",
+        "slug": "picture-postcard-shux",
+        "location": "Bengaluru",
+        "type": "Special",
+        "region": "KA",
+        "year": 2025,
+        "description": "",
+        "image": "1753104202_shub.webp",
+        "origin": "India",
+        "source": "GPO Mysore",
+        "quantity": 1
+    },
+    {
         "id": 10,
         "title": "Successful docking Axiom-4 with ISS",
         "slug": "successful-docking-axiom-4-with-iss",

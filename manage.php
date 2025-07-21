@@ -151,14 +151,14 @@ function regenerate_index($entries) {
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
         <div class="container">
-            <a class="navbar-brand" href="#"><i class="bi bi-envelope-paper-heart-fill"></i> PPC Catalog</a>
+            <a class="navbar-brand" href="#"><i class="bi bi-envelope-paper-heart-fill"></i> Postcard Catalog</a>
         </div>
     </nav>
 
     <header class="py-5 bg-light border-bottom mb-4">
         <div class="container">
             <div class="text-center my-4">
-                <h1 class="fw-bolder display-5">The PPC Collection of <?= OWNER_NAME ?></h1>
+                <h1 class="fw-bolder display-5">The Postcard Collection of <?= OWNER_NAME ?></h1>
                 <p class="lead mb-0">A catalog of my private collection of Pictorial Cancellations.</p>
             </div>
         </div>
