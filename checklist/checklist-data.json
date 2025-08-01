@@ -45,7 +45,7 @@
         "pincode": 110030,
         "post_office": "Qutub Minar NA",
         "district": "South West Delhi",
-        "collected": false
+        "collected": true
     },
     {
         "id": 7,
@@ -1581,7 +1581,7 @@
         "pincode": 530001,
         "post_office": "Visakhapatnam HO",
         "district": "Visakhapatnam",
-        "collected": false
+        "collected": true
     },
     {
         "id": 199,
@@ -1589,7 +1589,7 @@
         "pincode": 530001,
         "post_office": "Visakhapatnam Shipyard HO",
         "district": "Visakhapatnam",
-        "collected": false
+        "collected": true
     },
     {
         "id": 200,

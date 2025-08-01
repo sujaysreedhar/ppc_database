@@ -294,11 +294,11 @@ function regenerate_entry_pages($entries) {
                 <h1 class="display-5"><?= htmlspecialchars($entry['title']) ?></h1>
                 <p class="lead text-muted"><i class="bi bi-geo-alt-fill"></i> <?= htmlspecialchars($entry['location']) ?></p>
                 <hr>
-                <?php if ($entry['quantity'] > 1): ?>
+                <?php if ($entry['quantity'] > 2): ?>
                 <div class="card bg-light border-success mb-4">
                     <div class="card-body text-center">
                         <h5 class="card-title">Available for Trade!</h5>
-                        <p class="card-text">I have <?= htmlspecialchars($entry['quantity'] - 1) ?> extra cop<?= ($entry['quantity'] - 1) > 1 ? 'ies' : 'y' ?> of this item available.</p>
+                        <p class="card-text">I have <?= htmlspecialchars($entry['quantity'] - 2) ?> extra cop<?= ($entry['quantity'] - 2) > 1 ? 'ies' : 'y' ?> of this item available.</p>
                         <a href="<?= htmlspecialchars($trade_link) ?>" class="btn btn-success" target="_blank"><i class="bi bi-arrow-repeat"></i> Make a Trade Offer</a>
                     </div>
                 </div>
