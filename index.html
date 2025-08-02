@@ -11,6 +11,7 @@
         .ppc-card { transition: transform 0.2s ease-in-out; }
         .ppc-card:hover { transform: translateY(-5px); }
         .pagination .page-link { cursor: pointer; }
+        .ppc-card.d-none { display: none !important; }
     </style>
 </head>
 <body>
@@ -19,6 +20,7 @@
             <a class="navbar-brand" href="#"><i class="bi bi-envelope-paper-heart-fill"></i> PPC Catalog</a>
         </div>
     </nav>
+
     <header class="py-5 bg-light border-bottom mb-4">
         <div class="container">
             <div class="text-center my-4">
@@ -27,6 +29,7 @@
             </div>
         </div>
     </header>
+
     <main class="container">
         <div class="row mb-4">
             <div class="col-md-8 offset-md-2">
@@ -37,6 +40,7 @@
                 <div id="resultsCount" class="text-center text-muted mt-2"></div>
             </div>
         </div>
+
         <div id="ppcGrid" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
                                     <div class="col ppc-card" data-search-content="congratulations to shubhanshu shukla mumbai 2025 mh special india ">
                 <div class="card h-100 shadow-sm">
@@ -221,10 +225,119 @@
                 </div>
             </div>
                     </div>
-        <nav aria-label="Page navigation" class="mt-5 d-flex justify-content-center"><ul id="pagination" class="pagination"></ul></nav>
+        
+        <nav aria-label="Page navigation" class="mt-5 d-flex justify-content-center">
+            <ul id="pagination" class="pagination"></ul>
+        </nav>
+
     </main>
-    <footer class="text-center py-4 bg-dark text-white mt-5"><p class="mb-0">© 2025 Sujay Sreedhar. A catalog of my private collection.</p></footer>
+    <footer class="text-center py-4 bg-dark text-white mt-5">
+        <p class="mb-0">© 2025 Sujay Sreedhar. A catalog of my private collection.</p>
+    </footer>
+
 <script>
-document.addEventListener('DOMContentLoaded',function(){const e=12,t=document.getElementById("searchInput"),n=document.getElementById("ppcGrid"),a=Array.from(n.getElementsByClassName("ppc-card")),l=document.getElementById("pagination"),c=document.getElementById("resultsCount");let d=1,s=[...a];function i(t,n){d=t;const o=(t-1)*e,r=o+e;a.forEach(e=>e.style.display="none");const i=n.slice(o,r);i.forEach(e=>e.style.display="block"),u(n.length)}function o(e){l.innerHTML="";const t=Math.ceil(e.length/e);if(t<=1)return void(c.textContent=`${e.length} entr${1===e.length?"y":"ies"} found.`);c.textContent=`Showing ${Math.min(e.length,t*d)} of ${e.length} entries.`;const n=document.createElement("li");n.className=`page-item ${1===d?"disabled":""}`,n.innerHTML='<a class="page-link">Previous</a>',n.addEventListener("click",()=>{1<d&&i(d-1,e)}),l.appendChild(n);for(let a=1;a<=t;a++){const e=document.createElement("li");e.className=`page-item ${a===d?"active":""}`,e.innerHTML=`<a class="page-link">${a}</a>`,e.addEventListener("click",()=>i(a,s)),l.appendChild(e)}const o=document.createElement("li");o.className=`page-item ${d===t?"disabled":""}`,o.innerHTML='<a class="page-link">Next</a>',o.addEventListener("click",()=>{d<t&&i(d+1,e)}),l.appendChild(o)}function u(e){const t=Math.ceil(e/e),n=l.children;if(0===n.length)return;Array.from(n).forEach((e,a)=>{a>0&&a<=t&&e.classList.toggle("active",a===d)}),n[0].classList.toggle("disabled",1===d),n[n.length-1].classList.toggle("disabled",d===t)}t.addEventListener("input",function(){s=a.filter(e=>e.getAttribute("data-search-content").includes(t.value.toLowerCase().trim())),i(1,s),o(s)}),i(1,a),o(a)});
-</script></body></html>
+document.addEventListener('DOMContentLoaded', function() {
+    const ITEMS_PER_PAGE = 12; // Items to show per page
+    const searchInput = document.getElementById('searchInput');
+    const pccGrid = document.getElementById('ppcGrid');
+    const allCards = Array.from(pccGrid.getElementsByClassName('ppc-card'));
+    const paginationContainer = document.getElementById('pagination');
+    const resultsCount = document.getElementById('resultsCount');
+    
+    let currentPage = 1;
+    let filteredCards = [...allCards];
+
+    function showPage(page, items) {
+        currentPage = page;
+        const startIndex = (page - 1) * ITEMS_PER_PAGE;
+        const endIndex = startIndex + ITEMS_PER_PAGE;
+
+        // Hide all items first by adding d-none class
+        allCards.forEach(card => card.classList.add('d-none'));
+        
+        // Show only the items for the current page by removing d-none class
+        const pageItems = items.slice(startIndex, endIndex);
+        pageItems.forEach(card => card.classList.remove('d-none'));
+
+        updatePaginationUI(items.length);
+    }
+
+    function setupPagination(items) {
+        paginationContainer.innerHTML = '';
+        const pageCount = Math.ceil(items.length / ITEMS_PER_PAGE);
+
+        if (pageCount <= 1) {
+            resultsCount.textContent = `${items.length} entr${items.length === 1 ? 'y' : 'ies'} found.`;
+            return;
+        }
+
+        resultsCount.textContent = `Showing ${items.slice(0, ITEMS_PER_PAGE * currentPage).length} of ${items.length} entries.`;
+
+        // Previous Button
+        const prevLi = document.createElement('li');
+        prevLi.className = `page-item ${currentPage === 1 ? 'disabled' : ''}`;
+        prevLi.innerHTML = `<a class="page-link">Previous</a>`;
+        prevLi.addEventListener('click', () => {
+            if (currentPage > 1) showPage(currentPage - 1, items);
+        });
+        paginationContainer.appendChild(prevLi);
+
+        // Page Number Buttons
+        for (let i = 1; i <= pageCount; i++) {
+            const li = document.createElement('li');
+            li.className = `page-item ${i === currentPage ? 'active' : ''}`;
+            li.innerHTML = `<a class="page-link">${i}</a>`;
+            li.addEventListener('click', () => showPage(i, items));
+            paginationContainer.appendChild(li);
+        }
+
+        // Next Button
+        const nextLi = document.createElement('li');
+        nextLi.className = `page-item ${currentPage === pageCount ? 'disabled' : ''}`;
+        nextLi.innerHTML = `<a class="page-link">Next</a>`;
+        nextLi.addEventListener('click', () => {
+            if (currentPage < pageCount) showPage(currentPage + 1, items);
+        });
+        paginationContainer.appendChild(nextLi);
+    }
+    
+    function updatePaginationUI(totalItems) {
+        const pageCount = Math.ceil(totalItems / ITEMS_PER_PAGE);
+        const pageItems = paginationContainer.children;
+        
+        if (pageItems.length === 0) {
+            setupPagination(filteredCards);
+            return;
+        };
+
+        // Update active state
+        Array.from(pageItems).forEach((item, index) => {
+            if (index > 0 && index <= pageCount) {
+                item.classList.toggle('active', index === currentPage);
+            }
+        });
+
+        pageItems[0].classList.toggle('disabled', currentPage === 1);
+        pageItems[pageItems.length - 1].classList.toggle('disabled', currentPage === pageCount);
+    }
+
+    function handleSearch() {
+        const query = searchInput.value.toLowerCase().trim();
+        
+        filteredCards = allCards.filter(card => {
+            return card.getAttribute('data-search-content').includes(query);
+        });
+        
+        showPage(1, filteredCards); // Go to first page of results
+        setupPagination(filteredCards); // Re-create pagination for filtered results
+    }
+
+    // Initial Load
+    searchInput.addEventListener('input', handleSearch);
+    showPage(1, allCards);
+    setupPagination(allCards);
+});
+</script>
+</body>
+</html>
     
