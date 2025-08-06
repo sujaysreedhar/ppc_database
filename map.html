@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Postcard Collection Map</title>
+<!-- Load Leaflet's CSS from a CDN -->
+<link crossorigin="" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"  rel="stylesheet"/>
+<style>
+    /* Make the map fill the entire viewport */
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+    #map {
+      width: 100%;
+      height: 100vh;
+    }
+  </style>
+</head>
+<body>
+<div id="map"></div>
+<!-- Load Leaflet's JavaScript from a CDN -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="./checklist/coordsMap.js"></script>
+
+<script>
+(async () => {
+      const map = L.map('map').setView([22.5937, 78.9629], 5);
+
+      L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+        maxZoom: 19,
+        attribution: '&copy; Collection of Sujay Sreedhar'
+      }).addTo(map);
+
+      const redIcon = L.icon({
+        iconUrl: 'https://maps.google.com/mapfiles/ms/icons/red-dot.png',
+        iconSize: [32, 32],
+        iconAnchor: [16, 32],
+        popupAnchor: [0, -32]
+      });
+      const greenIcon = L.icon({
+        iconUrl: 'https://maps.google.com/mapfiles/ms/icons/green-dot.png',
+        iconSize: [32, 32],
+        iconAnchor: [16, 32],
+        popupAnchor: [0, -32]
+      });
+
+      const checklistResp = await fetch('./checklist/checklist-data.json');
+      const checklist = await checklistResp.json();
+
+  
+   const bounds = [];
+
+      for (const item of checklist) {
+        const coords = coordsMap[item.pincode];
+        if (!coords) {
+          console.warn('Missing coordinates for', item.pincode);
+          continue;
+        }
+        const chosenIcon = item.collected ? greenIcon : redIcon;
+        const marker = L.marker(coords, { icon: chosenIcon }).addTo(map);
+        const popup = `<strong>${item.name_of_ppc}</strong><br/>Pincode: ${item.pincode}<br/>Post Office: ${item.post_office}<br/>District: ${item.district}<br/>Collected: ${item.collected ? 'Yes' : 'No'}`;
+        marker.bindPopup(popup);
+        bounds.push(coords);
+      }
+
+      if (bounds.length > 0) {
+        map.fitBounds(bounds, { padding: [40, 40] });
+      }
+    })();
+</script>
+</body>
+</html>
