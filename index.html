@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-bs-theme="light">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,38 +10,68 @@
         .card-img-top { width: 100%; height: 200px; object-fit: cover; }
         .ppc-card { transition: transform 0.2s ease-in-out; }
         .ppc-card:hover { transform: translateY(-5px); }
-        .pagination .page-link { cursor: pointer; }
-        .ppc-card.d-none { display: none !important; }
     </style>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-        <div class="container">
-            <a class="navbar-brand" href="#"><i class="bi bi-envelope-paper-heart-fill"></i> PPC Catalog</a>
-        </div>
+        <div class="container"><a class="navbar-brand" href="#"><i class="bi bi-envelope-paper-heart-fill"></i> PPC Catalog</a></div>
     </nav>
-
     <header class="py-5 bg-light border-bottom mb-4">
         <div class="container">
             <div class="text-center my-4">
                 <h1 class="fw-bolder display-5">The PPC Collection of Sujay Sreedhar</h1>
                 <p class="lead mb-0">A catalog of my private collection of Permanent Pictorial Cancellations.</p>
             </div>
-        </div>
-    </header>
-
-    <main class="container">
-        <div class="row mb-4">
-            <div class="col-md-8 offset-md-2">
-                <div class="input-group">
-                    <span class="input-group-text"><i class="bi bi-search"></i></span>
-                    <input type="text" id="searchInput" class="form-control form-control-lg" placeholder="Search by title, location, year, origin, source...">
-                </div>
+             <div class="col-md-8 offset-md-2">
+                <div class="input-group"><span class="input-group-text"><i class="bi bi-search"></i></span><input type="text" id="searchInput" class="form-control form-control-lg" placeholder="Search by title, location, year, origin..."></div>
                 <div id="resultsCount" class="text-center text-muted mt-2"></div>
             </div>
         </div>
-
+    </header>
+    <main class="container">
         <div id="ppcGrid" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+                                    <div class="col ppc-card" data-search-content="asiatic cheetah baikunthapur - 497335 2025 chhattisgarh permanent india ">
+                <div class="card h-100 shadow-sm">
+                    <img src="assets/images/1754573759_6894abbf18f58.jpg" class="card-img-top" alt="Asiatic Cheetah">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">Asiatic Cheetah</h5>
+                        <p class="card-text text-muted small"><i class="bi bi-geo-alt"></i> Baikunthapur - 497335</p>
+                        <div class="mt-auto pt-2">
+                            <span class="badge bg-primary me-1">India</span>
+                            <span class="badge bg-secondary me-2">2025</span>
+                            <a href="entries/20-asiatic-cheetah.html" class="btn btn-primary btn-sm">View Details <i class="bi bi-arrow-right-short"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                                    <div class="col ppc-card" data-search-content="axiom mission 4 (launch) raipur - 492001 2025 chhattisgarh special india ">
+                <div class="card h-100 shadow-sm">
+                    <img src="assets/images/1754574227_6894ad9364ba0.jpg" class="card-img-top" alt="Axiom Mission 4 (Launch)">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">Axiom Mission 4 (Launch)</h5>
+                        <p class="card-text text-muted small"><i class="bi bi-geo-alt"></i> Raipur - 492001</p>
+                        <div class="mt-auto pt-2">
+                            <span class="badge bg-primary me-1">India</span>
+                            <span class="badge bg-secondary me-2">2025</span>
+                            <a href="entries/27-axiom-mission-4-launch.html" class="btn btn-primary btn-sm">View Details <i class="bi bi-arrow-right-short"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                                    <div class="col ppc-card" data-search-content="axiom mission 4 (successful return) raipur - 492001 2025 chhattisgarh special india ">
+                <div class="card h-100 shadow-sm">
+                    <img src="assets/images/1754574273_6894adc1a2300.jpg" class="card-img-top" alt="Axiom Mission 4 (Successful Return)">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">Axiom Mission 4 (Successful Return)</h5>
+                        <p class="card-text text-muted small"><i class="bi bi-geo-alt"></i> Raipur - 492001</p>
+                        <div class="mt-auto pt-2">
+                            <span class="badge bg-primary me-1">India</span>
+                            <span class="badge bg-secondary me-2">2025</span>
+                            <a href="entries/28-axiom-mission-4-successful-return.html" class="btn btn-primary btn-sm">View Details <i class="bi bi-arrow-right-short"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
                                     <div class="col ppc-card" data-search-content="bannerghatta ppc bannerghatta 2025 karnataka permanent india nikhitha">
                 <div class="card h-100 shadow-sm">
                     <img src="assets/images/1754469368_689313f864fcb.jpg" class="card-img-top" alt="Bannerghatta PPC">
@@ -58,7 +88,7 @@
             </div>
                                     <div class="col ppc-card" data-search-content="congratulations to shubhanshu shukla mumbai 2025 mh special india ">
                 <div class="card h-100 shadow-sm">
-                    <img src="assets/images/1753162136_687f2198e743d.jpg" class="card-img-top" alt="Congratulations to Shubhanshu Shukla">
+                    <img src="assets/images/1754577325_6894b9ade88ce.jpg" class="card-img-top" alt="Congratulations to Shubhanshu Shukla">
                     <div class="card-body d-flex flex-column">
                         <h5 class="card-title">Congratulations to Shubhanshu Shukla</h5>
                         <p class="card-text text-muted small"><i class="bi bi-geo-alt"></i> Mumbai</p>
@@ -66,6 +96,48 @@
                             <span class="badge bg-primary me-1">India</span>
                             <span class="badge bg-secondary me-2">2025</span>
                             <a href="entries/9-congratulations-to-shubhanshu-shukla.html" class="btn btn-primary btn-sm">View Details <i class="bi bi-arrow-right-short"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                                    <div class="col ppc-card" data-search-content="maria tribe jagdalpur - 494001 2025 chhattisgarh permanent india ">
+                <div class="card h-100 shadow-sm">
+                    <img src="assets/images/1754574175_6894ad5f1c1ee.jpg" class="card-img-top" alt="Maria Tribe">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">Maria Tribe</h5>
+                        <p class="card-text text-muted small"><i class="bi bi-geo-alt"></i> Jagdalpur - 494001</p>
+                        <div class="mt-auto pt-2">
+                            <span class="badge bg-primary me-1">India</span>
+                            <span class="badge bg-secondary me-2">2025</span>
+                            <a href="entries/26-maria-tribe.html" class="btn btn-primary btn-sm">View Details <i class="bi bi-arrow-right-short"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                                    <div class="col ppc-card" data-search-content="marine fossil manendragarh manendragarh - 497442 2025 chhattisgarh special india ">
+                <div class="card h-100 shadow-sm">
+                    <img src="assets/images/1754574327_6894adf7788ac.jpg" class="card-img-top" alt="Marine Fossil Manendragarh">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">Marine Fossil Manendragarh</h5>
+                        <p class="card-text text-muted small"><i class="bi bi-geo-alt"></i> Manendragarh - 497442</p>
+                        <div class="mt-auto pt-2">
+                            <span class="badge bg-primary me-1">India</span>
+                            <span class="badge bg-secondary me-2">2025</span>
+                            <a href="entries/29-marine-fossil-manendragarh.html" class="btn btn-primary btn-sm">View Details <i class="bi bi-arrow-right-short"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                                    <div class="col ppc-card" data-search-content="mata kaushalya mandir chandkhuri - 492101 2025 chhattisgarh permanent india ">
+                <div class="card h-100 shadow-sm">
+                    <img src="assets/images/1754574051_6894ace38a5d6.jpg" class="card-img-top" alt="Mata Kaushalya Mandir">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">Mata Kaushalya Mandir</h5>
+                        <p class="card-text text-muted small"><i class="bi bi-geo-alt"></i> Chandkhuri - 492101</p>
+                        <div class="mt-auto pt-2">
+                            <span class="badge bg-primary me-1">India</span>
+                            <span class="badge bg-secondary me-2">2025</span>
+                            <a href="entries/24-mata-kaushalya-mandir.html" class="btn btn-primary btn-sm">View Details <i class="bi bi-arrow-right-short"></i></a>
                         </div>
                     </div>
                 </div>
@@ -86,7 +158,7 @@
             </div>
                                     <div class="col ppc-card" data-search-content="picture postcard - shux bengaluru 2025 ka special india gpo mysore">
                 <div class="card h-100 shadow-sm">
-                    <img src="assets/images/1753104202_shub.webp" class="card-img-top" alt="Picture Postcard - Shux">
+                    <img src="assets/images/1754574749_6894af9da7a16.jpg" class="card-img-top" alt="Picture Postcard - Shux">
                     <div class="card-body d-flex flex-column">
                         <h5 class="card-title">Picture Postcard - Shux</h5>
                         <p class="card-text text-muted small"><i class="bi bi-geo-alt"></i> Bengaluru</p>
@@ -94,6 +166,20 @@
                             <span class="badge bg-primary me-1">India</span>
                             <span class="badge bg-secondary me-2">2025</span>
                             <a href="entries/11-picture-postcard-shux.html" class="btn btn-primary btn-sm">View Details <i class="bi bi-arrow-right-short"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                                    <div class="col ppc-card" data-search-content="semarsot sanctuary rajpur (su) - 497118 2025 chhattisgarh permanent india ">
+                <div class="card h-100 shadow-sm">
+                    <img src="assets/images/1754573888_6894ac4073103.jpg" class="card-img-top" alt="Semarsot Sanctuary">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">Semarsot Sanctuary</h5>
+                        <p class="card-text text-muted small"><i class="bi bi-geo-alt"></i> Rajpur (SU) - 497118</p>
+                        <div class="mt-auto pt-2">
+                            <span class="badge bg-primary me-1">India</span>
+                            <span class="badge bg-secondary me-2">2025</span>
+                            <a href="entries/21-semarsot-sanctuary.html" class="btn btn-primary btn-sm">View Details <i class="bi bi-arrow-right-short"></i></a>
                         </div>
                     </div>
                 </div>
@@ -114,7 +200,7 @@
             </div>
                                     <div class="col ppc-card" data-search-content="successful docking axiom-4 with iss mumbai 2025 mh special india ">
                 <div class="card h-100 shadow-sm">
-                    <img src="assets/images/1753162138_687f219a58664.jpg" class="card-img-top" alt="Successful docking Axiom-4 with ISS">
+                    <img src="assets/images/1754577302_6894b9968b88d.jpg" class="card-img-top" alt="Successful docking Axiom-4 with ISS">
                     <div class="card-body d-flex flex-column">
                         <h5 class="card-title">Successful docking Axiom-4 with ISS</h5>
                         <p class="card-text text-muted small"><i class="bi bi-geo-alt"></i> Mumbai</p>
@@ -128,7 +214,7 @@
             </div>
                                     <div class="col ppc-card" data-search-content="welcome shubhanshu shukla - return from iss mumbai 2025 mh special india ">
                 <div class="card h-100 shadow-sm">
-                    <img src="assets/images/1753162135_687f21977a887.jpg" class="card-img-top" alt="Welcome Shubhanshu Shukla - Return from ISS">
+                    <img src="assets/images/1754577390_6894b9eed3010.jpg" class="card-img-top" alt="Welcome Shubhanshu Shukla - Return from ISS">
                     <div class="card-body d-flex flex-column">
                         <h5 class="card-title">Welcome Shubhanshu Shukla - Return from ISS</h5>
                         <p class="card-text text-muted small"><i class="bi bi-geo-alt"></i> Mumbai</p>
@@ -142,7 +228,7 @@
             </div>
                                     <div class="col ppc-card" data-search-content="world snake day bannerghatta 2025 ka special india ">
                 <div class="card h-100 shadow-sm">
-                    <img src="assets/images/1753162134_687f21960abf9.jpg" class="card-img-top" alt="World Snake Day">
+                    <img src="assets/images/1754574712_6894af78ea764.jpg" class="card-img-top" alt="World Snake Day">
                     <div class="card-body d-flex flex-column">
                         <h5 class="card-title">World Snake Day</h5>
                         <p class="card-text text-muted small"><i class="bi bi-geo-alt"></i> Bannerghatta</p>
@@ -154,23 +240,79 @@
                     </div>
                 </div>
             </div>
-                                    <div class="col ppc-card" data-search-content="aditya l1 mission mumbai 2023 mh special india ">
+                                    <div class="col ppc-card" data-search-content="world sparrow day raipur - 492001 2025 chhattisgarh special india ">
                 <div class="card h-100 shadow-sm">
-                    <img src="assets/images/1753162127_687f218fe1cf4.jpg" class="card-img-top" alt="Aditya l1 mission">
+                    <img src="assets/images/1754574127_6894ad2f72cbd.jpg" class="card-img-top" alt="World Sparrow Day">
                     <div class="card-body d-flex flex-column">
-                        <h5 class="card-title">Aditya l1 mission</h5>
-                        <p class="card-text text-muted small"><i class="bi bi-geo-alt"></i> Mumbai</p>
+                        <h5 class="card-title">World Sparrow Day</h5>
+                        <p class="card-text text-muted small"><i class="bi bi-geo-alt"></i> Raipur - 492001</p>
+                        <div class="mt-auto pt-2">
+                            <span class="badge bg-primary me-1">India</span>
+                            <span class="badge bg-secondary me-2">2025</span>
+                            <a href="entries/25-world-sparrow-day.html" class="btn btn-primary btn-sm">View Details <i class="bi bi-arrow-right-short"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                                    <div class="col ppc-card" data-search-content="100 years of mohammed rafi raipur - 492001 2024 chhattisgarh special india ">
+                <div class="card h-100 shadow-sm">
+                    <img src="assets/images/1754573932_6894ac6c5f696.jpg" class="card-img-top" alt="100 Years of Mohammed Rafi">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">100 Years of Mohammed Rafi</h5>
+                        <p class="card-text text-muted small"><i class="bi bi-geo-alt"></i> Raipur - 492001</p>
+                        <div class="mt-auto pt-2">
+                            <span class="badge bg-primary me-1">India</span>
+                            <span class="badge bg-secondary me-2">2024</span>
+                            <a href="entries/22-100-years-of-mohammed-rafi.html" class="btn btn-primary btn-sm">View Details <i class="bi bi-arrow-right-short"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                                    <div class="col ppc-card" data-search-content="100 years of raj kapoor raipur - 492001 2024 chhattisgarh special india ">
+                <div class="card h-100 shadow-sm">
+                    <img src="assets/images/1754573981_6894ac9dc1032.jpg" class="card-img-top" alt="100 Years of Raj Kapoor">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">100 Years of Raj Kapoor</h5>
+                        <p class="card-text text-muted small"><i class="bi bi-geo-alt"></i> Raipur - 492001</p>
+                        <div class="mt-auto pt-2">
+                            <span class="badge bg-primary me-1">India</span>
+                            <span class="badge bg-secondary me-2">2024</span>
+                            <a href="entries/23-100-years-of-raj-kapoor.html" class="btn btn-primary btn-sm">View Details <i class="bi bi-arrow-right-short"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                                    <div class="col ppc-card" data-search-content="international day of world's indigenous peoples (baiga tribal artistry) raipur - 492001 2024 chhattisgarh special india ">
+                <div class="card h-100 shadow-sm">
+                    <img src="assets/images/1754577582_6894baae259af.jpg" class="card-img-top" alt="International Day of World's Indigenous Peoples (Baiga Tribal Artistry)">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">International Day of World's Indigenous Peoples (Baiga Tribal Artistry)</h5>
+                        <p class="card-text text-muted small"><i class="bi bi-geo-alt"></i> Raipur - 492001</p>
+                        <div class="mt-auto pt-2">
+                            <span class="badge bg-primary me-1">India</span>
+                            <span class="badge bg-secondary me-2">2024</span>
+                            <a href="entries/30-international-day-of-world-s-indigenous-peoples-baiga-tribal-artistry.html" class="btn btn-primary btn-sm">View Details <i class="bi bi-arrow-right-short"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                                    <div class="col ppc-card" data-search-content="aditya l1 mission to study sun mumbai 400001 2023 mh special india ">
+                <div class="card h-100 shadow-sm">
+                    <img src="assets/images/1754574880_6894b0208332c.jpg" class="card-img-top" alt="Aditya L1 mission to study Sun">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">Aditya L1 mission to study Sun</h5>
+                        <p class="card-text text-muted small"><i class="bi bi-geo-alt"></i> Mumbai 400001</p>
                         <div class="mt-auto pt-2">
                             <span class="badge bg-primary me-1">India</span>
                             <span class="badge bg-secondary me-2">2023</span>
-                            <a href="entries/2-aditya-l1-mission.html" class="btn btn-primary btn-sm">View Details <i class="bi bi-arrow-right-short"></i></a>
+                            <a href="entries/2-aditya-l1-mission-to-study-sun.html" class="btn btn-primary btn-sm">View Details <i class="bi bi-arrow-right-short"></i></a>
                         </div>
                     </div>
                 </div>
             </div>
                                     <div class="col ppc-card" data-search-content="chandrayaan 3 : successful deployment of pragyan rover on moon's surface mumbai 2023 mh special india ">
                 <div class="card h-100 shadow-sm">
-                    <img src="assets/images/1753162132_687f2194865b4.jpg" class="card-img-top" alt="Chandrayaan 3 : Successful deployment of Pragyan Rover on Moon's surface">
+                    <img src="assets/images/1754574808_6894afd8a3525.jpg" class="card-img-top" alt="Chandrayaan 3 : Successful deployment of Pragyan Rover on Moon's surface">
                     <div class="card-body d-flex flex-column">
                         <h5 class="card-title">Chandrayaan 3 : Successful deployment of Pragyan Rover on Moon's surface</h5>
                         <p class="card-text text-muted small"><i class="bi bi-geo-alt"></i> Mumbai</p>
@@ -184,7 +326,7 @@
             </div>
                                     <div class="col ppc-card" data-search-content="chandrayaan-3 : successful soft landing of lander-vikram on south polar region of moon mumbai 2023 mh special india ">
                 <div class="card h-100 shadow-sm">
-                    <img src="assets/images/1753162129_687f21918d335.jpg" class="card-img-top" alt="Chandrayaan-3 : Successful soft landing of Lander-Vikram on South Polar region of Moon">
+                    <img src="assets/images/1754574846_6894affea6d8a.jpg" class="card-img-top" alt="Chandrayaan-3 : Successful soft landing of Lander-Vikram on South Polar region of Moon">
                     <div class="card-body d-flex flex-column">
                         <h5 class="card-title">Chandrayaan-3 : Successful soft landing of Lander-Vikram on South Polar region of Moon</h5>
                         <p class="card-text text-muted small"><i class="bi bi-geo-alt"></i> Mumbai</p>
@@ -253,119 +395,27 @@
                 </div>
             </div>
                     </div>
-        
-        <nav aria-label="Page navigation" class="mt-5 d-flex justify-content-center">
-            <ul id="pagination" class="pagination"></ul>
-        </nav>
-
     </main>
-    <footer class="text-center py-4 bg-dark text-white mt-5">
-        <p class="mb-0">© 2025 Sujay Sreedhar. A catalog of my private collection.</p>
-    </footer>
-
+    <footer class="text-center py-4 bg-dark text-white mt-5"><p class="mb-0">© 2025 Sujay Sreedhar</p></footer>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    const ITEMS_PER_PAGE = 12; // Items to show per page
     const searchInput = document.getElementById('searchInput');
     const pccGrid = document.getElementById('ppcGrid');
     const allCards = Array.from(pccGrid.getElementsByClassName('ppc-card'));
-    const paginationContainer = document.getElementById('pagination');
     const resultsCount = document.getElementById('resultsCount');
-    
-    let currentPage = 1;
-    let filteredCards = [...allCards];
-
-    function showPage(page, items) {
-        currentPage = page;
-        const startIndex = (page - 1) * ITEMS_PER_PAGE;
-        const endIndex = startIndex + ITEMS_PER_PAGE;
-
-        // Hide all items first by adding d-none class
-        allCards.forEach(card => card.classList.add('d-none'));
-        
-        // Show only the items for the current page by removing d-none class
-        const pageItems = items.slice(startIndex, endIndex);
-        pageItems.forEach(card => card.classList.remove('d-none'));
-
-        updatePaginationUI(items.length);
-    }
-
-    function setupPagination(items) {
-        paginationContainer.innerHTML = '';
-        const pageCount = Math.ceil(items.length / ITEMS_PER_PAGE);
-
-        if (pageCount <= 1) {
-            resultsCount.textContent = `${items.length} entr${items.length === 1 ? 'y' : 'ies'} found.`;
-            return;
-        }
-
-        resultsCount.textContent = `Showing ${items.slice(0, ITEMS_PER_PAGE * currentPage).length} of ${items.length} entries.`;
-
-        // Previous Button
-        const prevLi = document.createElement('li');
-        prevLi.className = `page-item ${currentPage === 1 ? 'disabled' : ''}`;
-        prevLi.innerHTML = `<a class="page-link">Previous</a>`;
-        prevLi.addEventListener('click', () => {
-            if (currentPage > 1) showPage(currentPage - 1, items);
-        });
-        paginationContainer.appendChild(prevLi);
-
-        // Page Number Buttons
-        for (let i = 1; i <= pageCount; i++) {
-            const li = document.createElement('li');
-            li.className = `page-item ${i === currentPage ? 'active' : ''}`;
-            li.innerHTML = `<a class="page-link">${i}</a>`;
-            li.addEventListener('click', () => showPage(i, items));
-            paginationContainer.appendChild(li);
-        }
-
-        // Next Button
-        const nextLi = document.createElement('li');
-        nextLi.className = `page-item ${currentPage === pageCount ? 'disabled' : ''}`;
-        nextLi.innerHTML = `<a class="page-link">Next</a>`;
-        nextLi.addEventListener('click', () => {
-            if (currentPage < pageCount) showPage(currentPage + 1, items);
-        });
-        paginationContainer.appendChild(nextLi);
-    }
-    
-    function updatePaginationUI(totalItems) {
-        const pageCount = Math.ceil(totalItems / ITEMS_PER_PAGE);
-        const pageItems = paginationContainer.children;
-        
-        if (pageItems.length === 0) {
-            setupPagination(filteredCards);
-            return;
-        };
-
-        // Update active state
-        Array.from(pageItems).forEach((item, index) => {
-            if (index > 0 && index <= pageCount) {
-                item.classList.toggle('active', index === currentPage);
-            }
-        });
-
-        pageItems[0].classList.toggle('disabled', currentPage === 1);
-        pageItems[pageItems.length - 1].classList.toggle('disabled', currentPage === pageCount);
-    }
-
     function handleSearch() {
         const query = searchInput.value.toLowerCase().trim();
-        
-        filteredCards = allCards.filter(card => {
-            return card.getAttribute('data-search-content').includes(query);
+        let visibleCount = 0;
+        allCards.forEach(card => {
+            const isVisible = card.getAttribute('data-search-content').includes(query);
+            card.style.display = isVisible ? '' : 'none';
+            if(isVisible) visibleCount++;
         });
-        
-        showPage(1, filteredCards); // Go to first page of results
-        setupPagination(filteredCards); // Re-create pagination for filtered results
+        resultsCount.textContent = `${visibleCount} of ${allCards.length} entries shown.`;
     }
-
-    // Initial Load
     searchInput.addEventListener('input', handleSearch);
-    showPage(1, allCards);
-    setupPagination(allCards);
+    handleSearch(); // Initial count
 });
 </script>
 </body>
 </html>
-    

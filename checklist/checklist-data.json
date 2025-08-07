@@ -1341,7 +1341,7 @@
         "pincode": 493889,
         "post_office": "Gariaband SO",
         "district": "Gariaband",
-        "collected": false
+        "collected": true
     },
     {
         "id": 169,
@@ -1365,7 +1365,7 @@
         "pincode": 494115,
         "post_office": "Tongpal SO",
         "district": "Bastar",
-        "collected": false
+        "collected": true
     },
     {
         "id": 172,
@@ -1381,7 +1381,7 @@
         "pincode": 495113,
         "post_office": "Achanakmar BO",
         "district": "Mungeli",
-        "collected": false
+        "collected": true
     },
     {
         "id": 174,
