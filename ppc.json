@@ -1,5 +1,19 @@
 [
     {
+        "id": 35,
+        "title": "Achanakmar Tiger Reserve (ATR) - Tiger",
+        "slug": "achanakmar-tiger-reserve-atr-tiger",
+        "location": "Achanakmar - 495113",
+        "type": "Permanent",
+        "region": "Chhattisgarh",
+        "year": 2025,
+        "description": "",
+        "image": "1754578644_6894bed486673.jpg",
+        "origin": "India",
+        "source": "",
+        "quantity": 4
+    },
+    {
         "id": 20,
         "title": "Asiatic Cheetah",
         "slug": "asiatic-cheetah",
@@ -12,6 +26,20 @@
         "origin": "India",
         "source": "",
         "quantity": 6
+    },
+    {
+        "id": 32,
+        "title": "Asiatic Cheetah",
+        "slug": "asiatic-cheetah-2",
+        "location": "Baikunthapur - 497335",
+        "type": "Permanent",
+        "region": "Chhattisgarh",
+        "year": 2025,
+        "description": "",
+        "image": "1754578389_6894bdd5f033b.jpg",
+        "origin": "India",
+        "source": "",
+        "quantity": 1
     },
     {
         "id": 27,
@@ -70,6 +98,20 @@
         "quantity": 2
     },
     {
+        "id": 33,
+        "title": "Kandel Canal Satyagraha",
+        "slug": "kandel-canal-satyagraha",
+        "location": "Raipur - 492001",
+        "type": "Special",
+        "region": "Chhattisgarh",
+        "year": 2025,
+        "description": "",
+        "image": "1754578448_6894be1011d78.jpg",
+        "origin": "India",
+        "source": "",
+        "quantity": 5
+    },
+    {
         "id": 26,
         "title": "Maria Tribe",
         "slug": "maria-tribe",
@@ -110,6 +152,20 @@
         "origin": "India",
         "source": "",
         "quantity": 6
+    },
+    {
+        "id": 31,
+        "title": "Pahadi Myna \/ Hill Myna",
+        "slug": "pahadi-myna-hill-myna",
+        "location": "Tongpal - 494115",
+        "type": "Permanent",
+        "region": "Chhattisgarh",
+        "year": 2025,
+        "description": "",
+        "image": "1754578344_6894bda8666a0.jpg",
+        "origin": "India",
+        "source": "",
+        "quantity": 1
     },
     {
         "id": 12,
@@ -194,6 +250,20 @@
         "origin": "India",
         "source": "",
         "quantity": 1
+    },
+    {
+        "id": 34,
+        "title": "Wild Buffalo (\u091c\u0902\u0917\u0932\u0940 \u092d\u0948\u0902\u0938\u093e)",
+        "slug": "wild-buffalo",
+        "location": "Gariaband - 493889",
+        "type": "Permanent",
+        "region": "Chhattisgarh",
+        "year": 2025,
+        "description": "",
+        "image": "1754578553_6894be796d7a8.jpg",
+        "origin": "India",
+        "source": "",
+        "quantity": 4
     },
     {
         "id": 7,
