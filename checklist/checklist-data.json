@@ -1293,7 +1293,7 @@
         "pincode": 492101,
         "post_office": "Chand Bhuri BO",
         "district": "Raipur",
-        "collected": false
+        "collected": true
     },
     {
         "id": 163,
@@ -1349,7 +1349,7 @@
         "pincode": 494001,
         "post_office": "Jagdalpur HO",
         "district": "Bastar",
-        "collected": false
+        "collected": true
     },
     {
         "id": 170,
@@ -1421,7 +1421,7 @@
         "pincode": 497118,
         "post_office": "Rajpur (SIJ) SO",
         "district": "Surguja",
-        "collected": false
+        "collected": true
     },
     {
         "id": 179,
@@ -1429,7 +1429,7 @@
         "pincode": 497335,
         "post_office": "Baikunthapur SO",
         "district": "Koriya",
-        "collected": false
+        "collected": true
     },
     {
         "id": 180,

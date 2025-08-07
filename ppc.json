@@ -56,6 +56,20 @@
         "quantity": 1
     },
     {
+        "id": 18,
+        "title": "Shux - Special PostCard - Earth Welcomes AX-4",
+        "slug": "shux-special-postcard-earth-welcomes-ax-4",
+        "location": "Raipur 492001",
+        "type": "Special",
+        "region": "Chattishgrah",
+        "year": 2025,
+        "description": "",
+        "image": "1754559501_6894740d1b0d4.jpg",
+        "origin": "India",
+        "source": "Ruthanshi",
+        "quantity": 5
+    },
+    {
         "id": 10,
         "title": "Successful docking Axiom-4 with ISS",
         "slug": "successful-docking-axiom-4-with-iss",
