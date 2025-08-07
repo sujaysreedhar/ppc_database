@@ -28,20 +28,6 @@
         "quantity": 6
     },
     {
-        "id": 32,
-        "title": "Asiatic Cheetah",
-        "slug": "asiatic-cheetah-2",
-        "location": "Baikunthapur - 497335",
-        "type": "Permanent",
-        "region": "Chhattisgarh",
-        "year": 2025,
-        "description": "",
-        "image": "1754578389_6894bdd5f033b.jpg",
-        "origin": "India",
-        "source": "",
-        "quantity": 1
-    },
-    {
         "id": 27,
         "title": "Axiom Mission 4 (Launch)",
         "slug": "axiom-mission-4-launch",
