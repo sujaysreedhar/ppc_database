@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Postcard Collection Map with Search</title>
+<link crossorigin="" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" rel="stylesheet"/>
+<style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+    #map {
+      width: 100%;
+      height: calc(100vh - 50px);
+    }
+    #searchBox {
+      width: 100%;
+      height: 50px;
+      box-sizing: border-box;
+      font-size: 16px;
+      padding: 10px;
+      border: none;
+      outline: none;
+    }
+</style>
+</head>
+<body>
+<input type="text" id="searchBox" placeholder="Search by name, pincode, post office, district, collected..." />
+<div id="map"></div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="./checklist/coordsMap.js"></script>
+<script>
+(async () => {
+  const map = L.map('map').setView([22.5937, 78.9629], 5);
+
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+    maxZoom: 19,
+    attribution: '&copy; Collection of Sujay Sreedhar'
+  }).addTo(map);
+
+  const redIcon = L.icon({
+    iconUrl: 'https://maps.google.com/mapfiles/ms/icons/red-dot.png',
+    iconSize: [32, 32],
+    iconAnchor: [16, 32],
+    popupAnchor: [0, -32]
+  });
+  const greenIcon = L.icon({
+    iconUrl: 'https://maps.google.com/mapfiles/ms/icons/green-dot.png',
+    iconSize: [32, 32],
+    iconAnchor: [16, 32],
+    popupAnchor: [0, -32]
+  });
+  
+  // --- NEW: Icon for user's location ---
+  const blueIcon = L.icon({
+    iconUrl: 'https://maps.google.com/mapfiles/ms/icons/blue-dot.png',
+    iconSize: [32, 32],
+    iconAnchor: [16, 32],
+    popupAnchor: [0, -32]
+  });
+
+
+  const checklistResp = await fetch('./checklist/checklist-data.json');
+  const checklist = await checklistResp.json();
+
+  const bounds = [];
+  const markers = [];
+
+  for (const item of checklist) {
+    const coords = coordsMap[item.pincode];
+    if (!coords) {
+      console.warn('Missing coordinates for', item.pincode);
+      continue;
+    }
+    const chosenIcon = item.collected ? greenIcon : redIcon;
+    const marker = L.marker(coords, { icon: chosenIcon }).addTo(map);
+    const popup = `<strong>${item.name_of_ppc}</strong><br/>Pincode: ${item.pincode}<br/>Post Office: ${item.post_office}<br/>District: ${item.district}<br/>Collected: ${item.collected ? 'Yes' : 'No'}`;
+    marker.bindPopup(popup);
+    bounds.push(coords);
+    markers.push({
+      marker,
+      searchString: `${item.name_of_ppc} ${item.pincode} ${item.post_office} ${item.district} ${item.collected ? 'yes' : 'no'}`.toLowerCase()
+    });
+  }
+
+  if (bounds.length > 0) {
+    // We will now let the user's location take precedence for the initial view,
+    // but we can still fit to the data if location is not available.
+    // map.fitBounds(bounds, { padding: [40, 40] });
+  }
+
+  document.getElementById('searchBox').addEventListener('input', function() {
+    const query = this.value.toLowerCase();
+    markers.forEach(({ marker, searchString }) => {
+      if (searchString.includes(query)) {
+        // If the marker isn't on the map, add it back
+        if (!map.hasLayer(marker)) {
+          marker.addTo(map);
+        }
+      } else {
+        // If the marker is on the map, remove it
+        if (map.hasLayer(marker)) {
+          map.removeLayer(marker);
+        }
+      }
+    });
+  });
+
+  // --- NEW: GEOLOCATION LOGIC ---
+
+  let userLocationMarker = null;
+  let userAccuracyCircle = null;
+  let isFirstLocationUpdate = true;
+
+  function onLocationFound(e) {
+    const latlng = [e.coords.latitude, e.coords.longitude];
+    const radius = e.coords.accuracy;
+
+    // If the marker doesn't exist yet, create it
+    if (!userLocationMarker) {
+      userLocationMarker = L.marker(latlng, { icon: blueIcon }).addTo(map)
+        .bindPopup(`<b>You are here!</b><br>Accuracy: ${radius.toFixed(0)} meters.`);
+      
+      userAccuracyCircle = L.circle(latlng, {
+        radius: radius,
+        weight: 1,
+        color: '#136AEC',
+        fillColor: '#136AEC',
+        fillOpacity: 0.15
+      }).addTo(map);
+    } else {
+      // Otherwise, just update its position and the accuracy circle
+      userLocationMarker.setLatLng(latlng)
+        .setPopupContent(`<b>You are here!</b><br>Accuracy: ${radius.toFixed(0)} meters.`);
+      userAccuracyCircle.setLatLng(latlng).setRadius(radius);
+    }
+    
+    // On the very first location update, pan the map to the user's location
+    if (isFirstLocationUpdate) {
+      map.flyTo(latlng, 13); // Use flyTo for a smooth animation
+      isFirstLocationUpdate = false;
+    }
+  }
+
+  function onLocationError(e) {
+    console.error("Geolocation error:", e.message);
+    // If the map hasn't been centered yet and location fails, fit to the data bounds
+    if (isFirstLocationUpdate && bounds.length > 0) {
+        map.fitBounds(bounds, { padding: [40, 40] });
+    }
+    alert("Could not get your location. Please ensure you have granted permission and have a stable connection.");
+  }
+
+  // Check if Geolocation is available and start watching for position changes
+  if ('geolocation' in navigator) {
+    navigator.geolocation.watchPosition(onLocationFound, onLocationError, {
+      enableHighAccuracy: true,
+      timeout: 10000, // 10 seconds
+      maximumAge: 0 // Don't use a cached position
+    });
+  } else {
+    console.log("Geolocation is not supported by this browser.");
+    // Fallback to fitting the data bounds if geolocation isn't supported at all
+    if (bounds.length > 0) {
+      map.fitBounds(bounds, { padding: [40, 40] });
+    }
+  }
+  
+  // Also, improved search logic to handle adding markers back
+  // The original logic only removed markers but didn't add them back. This is fixed above.
+
+})();
+</script>
+</body>
+</html>
