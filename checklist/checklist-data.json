@@ -2445,7 +2445,7 @@
         "pincode": 600002,
         "post_office": "Anna Road HO",
         "district": "Chennai",
-        "collected": false
+        "collected": true
     },
     {
         "id": 307,
@@ -2733,7 +2733,7 @@
         "pincode": 631501,
         "post_office": "Kanchipuram HO",
         "district": "Kanchipuram",
-        "collected": false
+        "collected": true
     },
     {
         "id": 341,
