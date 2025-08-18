@@ -280,6 +280,20 @@
         "quantity": 2
     },
     {
+        "id": 40,
+        "title": "Vellore Fort with Moat",
+        "slug": "vellore-fort-with-moat",
+        "location": "Vellore Fort SO - 632004",
+        "type": "Permanent",
+        "region": "Tamilnadu",
+        "year": 2025,
+        "description": "",
+        "image": "1755522464_68a325a0bd450.jpg",
+        "origin": "India",
+        "source": "",
+        "quantity": 10
+    },
+    {
         "id": 8,
         "title": "Welcome Shubhanshu Shukla - Return from ISS",
         "slug": "welcome-shubhanshu-shukla-return-from-iss",
