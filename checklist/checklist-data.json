@@ -1853,7 +1853,7 @@
         "pincode": 572104,
         "post_office": "Siddaganga Mutt SO",
         "district": "Tumakuru",
-        "collected": false
+        "collected": true
     },
     {
         "id": 233,
@@ -1861,7 +1861,7 @@
         "pincode": 572168,
         "post_office": "Hirehalli SO",
         "district": "Tumakuru",
-        "collected": false
+        "collected": true
     },
     {
         "id": 234,
