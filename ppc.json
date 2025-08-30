@@ -14,6 +14,20 @@
         "quantity": 4
     },
     {
+        "id": 43,
+        "title": "Adi Sankaracharya",
+        "slug": "adi-sankaracharya",
+        "location": "Ernalkulam - 683574",
+        "type": "Permanent",
+        "region": "Kerala",
+        "year": 2025,
+        "description": "",
+        "image": "1756556772_68b2ede4216c8.jpg",
+        "origin": "India",
+        "source": "",
+        "quantity": 5
+    },
+    {
         "id": 38,
         "title": "Anna Road Post Office (Warwick Electric Theatre)",
         "slug": "anna-road-post-office-warwick-electric-theatre",
@@ -140,6 +154,20 @@
         "quantity": 5
     },
     {
+        "id": 42,
+        "title": "Lighted Candles in Holy Cross Church, Mapranam",
+        "slug": "lighted-candles-in-holy-cross-church-mapranam",
+        "location": "Mapranam - 680172",
+        "type": "Permanent",
+        "region": "Kerala",
+        "year": 2025,
+        "description": "",
+        "image": "1756556543_68b2ecffb7a0c.jpg",
+        "origin": "India",
+        "source": "",
+        "quantity": 5
+    },
+    {
         "id": 36,
         "title": "Maha Kumbha Mela card with Stamp and special cancellation",
         "slug": "maha-kumbha-mela-card-with-stamp-and-special-cancellation",
@@ -194,6 +222,20 @@
         "origin": "India",
         "source": "",
         "quantity": 6
+    },
+    {
+        "id": 45,
+        "title": "National Doctor's Day",
+        "slug": "national-doctor-s-day",
+        "location": "Thrissur - 680001",
+        "type": "Special",
+        "region": "Kerala",
+        "year": 2025,
+        "description": "",
+        "image": "1756557086_68b2ef1eac444.jpg",
+        "origin": "India",
+        "source": "",
+        "quantity": 5
     },
     {
         "id": 31,
@@ -280,6 +322,20 @@
         "quantity": 2
     },
     {
+        "id": 41,
+        "title": "Thrissur Pooram Festival Elephant",
+        "slug": "thrissur-pooram-festival-elephant",
+        "location": "Thrissur - 680001",
+        "type": "Permanent",
+        "region": "Kerala",
+        "year": 2025,
+        "description": "",
+        "image": "1756556295_68b2ec07107b6.jpg",
+        "origin": "India",
+        "source": "",
+        "quantity": 5
+    },
+    {
         "id": 40,
         "title": "Vellore Fort with Moat",
         "slug": "vellore-fort-with-moat",
@@ -320,6 +376,20 @@
         "origin": "India",
         "source": "",
         "quantity": 4
+    },
+    {
+        "id": 44,
+        "title": "World  Music Day",
+        "slug": "world-music-day",
+        "location": "Thrissur - 680001",
+        "type": "Special",
+        "region": "Kerala",
+        "year": 2025,
+        "description": "",
+        "image": "1756556900_68b2ee647cdd5.jpg",
+        "origin": "India",
+        "source": "",
+        "quantity": 5
     },
     {
         "id": 7,

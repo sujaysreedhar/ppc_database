@@ -1661,7 +1661,7 @@
         "pincode": 560012,
         "post_office": "Science Institute SO",
         "district": "Bengaluru Urban",
-        "collected": false
+        "collected": true
     },
     {
         "id": 209,
@@ -2997,7 +2997,7 @@
         "pincode": 680001,
         "post_office": "Thrissur HO",
         "district": "Thrissur",
-        "collected": false
+        "collected": true
     },
     {
         "id": 376,
@@ -3029,7 +3029,7 @@
         "pincode": 680712,
         "post_office": "Madayikonam SO",
         "district": "Thrissur",
-        "collected": false
+        "collected": true
     },
     {
         "id": 380,
@@ -3061,7 +3061,7 @@
         "pincode": 683574,
         "post_office": "Kalady SO",
         "district": "Ernakulam",
-        "collected": false
+        "collected": true
     },
     {
         "id": 384,
