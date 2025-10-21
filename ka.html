@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Karnataka Locations Map</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+        #map {
+            height: 75%;
+            width: 100%;
+        }
+        #controls {
+            height: 25%;
+            padding: 15px;
+            box-sizing: border-box;
+            overflow-y: auto;
+            background-color: #f9f9f9;
+            border-top: 1px solid #ccc;
+        }
+        h2 {
+            margin-top: 0;
+        }
+        #selectedLocationsList {
+            list-style-type: none;
+            padding: 0;
+        }
+        #selectedLocationsList li {
+            background-color: #e7e7e7;
+            padding: 8px;
+            margin-bottom: 5px;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        .info-window-content {
+            font-weight: bold;
+        }
+        .info-window-content button {
+            display: block;
+            width: 100%;
+            margin-top: 8px;
+            box-sizing: border-box;
+        }
+        .info-window-content .add-route-btn {
+            background-color: #008CBA;
+        }
+        .info-window-content .add-route-btn:hover {
+            background-color: #007B9A;
+        }
+        .info-window-content .open-gmaps-btn {
+            background-color: #f44336;
+        }
+        .info-window-content .open-gmaps-btn:hover {
+            background-color: #da190b;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="map"></div>
+    <div id="controls">
+        <h2>Route Planner</h2>
+        <p>Click on a map marker to see details. Click "Add to Route" in the popup. When you have selected 2 or more locations, this button will become active.</p>
+        <button id="calculateRouteBtn" disabled>Calculate Optimized Route</button>
+        <h3>Selected Locations:</h3>
+        <ul id="selectedLocationsList">
+            <!-- Selected locations will be listed here -->
+        </ul>
+    </div>
+
+    <script>
+        // Data with latitude and longitude (same as before)
+        const locations = [
+            { "name": "Vidhana Soudha", "lat": 12.9797, "lng": 77.5907 }, { "name": "Karnataka High Court Building", "lat": 12.9800, "lng": 77.5925 }, { "name": "Kempegowda Tower", "lat": 12.9429, "lng": 77.5714 }, { "name": "Rajajinagar Foundation Pillar", "lat": 12.9901, "lng": 77.5516 }, { "name": "Ashoka Pillar", "lat": 12.9373, "lng": 77.5833 }, { "name": "Indian Institute of Science Building", "lat": 13.0219, "lng": 77.5671 }, { "name": "U R Rao Satellite Centre", "lat": 12.9698, "lng": 77.6833 }, { "name": "Sandesha Museum", "lat": 12.9712, "lng": 77.6083 }, { "name": "Butterfly-Malabar Banded Peacock (Bannerghatta)", "lat": 12.8005, "lng": 77.5774 }, { "name": "Nandi Statue", "lat": 13.3664, "lng": 77.6833 }, { "name": "Grizzled Giant Squirrel (Cauvery Wildlife Sanctuary)", "lat": 12.2638, "lng": 77.2941 }, { "name": "Gold Miner (Kolar Gold Fields)", "lat": 12.9610, "lng": 78.2709 }, { "name": "Masti Venkatesha Iyengar (Masti Village)", "lat": 12.8427, "lng": 78.0776 }, { "name": "Elephant Carrying Howdah (Mysuru Palace)", "lat": 12.3051, "lng": 76.6551 }, { "name": "Silver Jubilee Clock Tower", "lat": 12.3038, "lng": 76.6521 }, { "name": "Mysuru: Our Heritage - Your Destination", "lat": 12.2958, "lng": 76.6394 }, { "name": "Mahishasura (Chamundi Hills)", "lat": 12.2753, "lng": 76.6701 }, { "name": "Nada Mantapa (SGS Ashram)", "lat": 12.2889, "lng": 76.6715 }, { "name": "Sri Chennakesava Temple", "lat": 12.2172, "lng": 76.8961 }, { "name": "Panchalinga Darshan", "lat": 12.2346, "lng": 76.9934 }, { "name": "Tiger Face (Bandipur National Park)", "lat": 11.6666, "lng": 76.6341 }, { "name": "Tiger Paw (Bandipur National Park)", "lat": 11.6666, "lng": 76.6341 }, { "name": "Odi Kathi & Peechi Kathi", "lat": 12.4208, "lng": 75.7397 }, { "name": "Gloriosa Superba (Nagarahole National Park)", "lat": 12.0378, "lng": 76.1309 }, { "name": "Porcupine (Biligiriranga Hills)", "lat": 11.9868, "lng": 77.1352 }, { "name": "Flying Pelican (Kokkare Bellur Bird Sanctuary)", "lat": 12.5186, "lng": 77.0655 }, { "name": "Gumbaz", "lat": 12.4332, "lng": 76.6974 }, { "name": "Crown and Sword of Tipu Sultan", "lat": 12.4246, "lng": 76.6917 }, { "name": "Elephant (Mahadeshwara Hills)", "lat": 12.0287, "lng": 77.5857 }, { "name": "His Holiness Sri Sivakumara Mahaswamiji (Siddaganga Mutt)", "lat": 13.3361, "lng": 77.1264 }, { "name": "Pinchi Basadi, Mandaragiri", "lat": 13.1956, "lng": 77.2024 }, { "name": "Darpana Sundari (Belur)", "lat": 13.1619, "lng": 75.8644 }, { "name": "Natya Saraswati (Halebeedu)", "lat": 13.2128, "lng": 75.9947 }, { "name": "Gomateswara", "lat": 12.8488, "lng": 76.4839 }, { "name": "Seated Tirthankara (Karkala)", "lat": 13.2201, "lng": 74.9859 }, { "name": "Mattu Gulla (Mattu Village)", "lat": 13.2981, "lng": 74.7212 }, { "name": "Kaup Lighthouse", "lat": 13.2238, "lng": 74.7431 }, { "name": "Kere Basadi", "lat": 13.3881, "lng": 74.9702 }, { "name": "Shankarpura Mallige (Shankarpura)", "lat": 13.3039, "lng": 74.7891 }, { "name": "Sri Durga Parameshwari Temple", "lat": 13.0450, "lng": 74.9602 }, { "name": "Sri Manjunatheswara Temple", "lat": 12.9515, "lng": 75.3857 }, { "name": "Saavira Kambada Basadi", "lat": 13.0478, "lng": 74.9912 }, { "name": "Vasuki (Kukke Subramanya Temple)", "lat": 12.6657, "lng": 75.6178 }, { "name": "Baahubali (Venur)", "lat": 13.0039, "lng": 75.1475 }, { "name": "Mangaluru Lighthouse", "lat": 12.8680, "lng": 74.8359 }, { "name": "Rani Abbakka Devi (Ullal)", "lat": 12.8130, "lng": 74.8519 }, { "name": "Deity of Sri Krishna (Udupi)", "lat": 13.3421, "lng": 74.7523 }, { "name": "Sri Venugopala Swamy Temple (Manipal)", "lat": 13.3541, "lng": 74.7877 }, { "name": "St. Mary’s Islands", "lat": 13.3550, "lng": 74.7100 }, { "name": "Kavi Muddana & Manorame", "lat": 13.2797, "lng": 74.9455 }, { "name": "Indian Spotted Chevrotain (Someshwara Wildlife Sanctuary)", "lat": 13.5284, "lng": 75.0594 }, { "name": "St. Lawrence Minor Basilica", "lat": 13.2241, "lng": 74.9691 }, { "name": "Panchagangavali (Kundapura)", "lat": 13.6335, "lng": 74.6937 }, { "name": "Kathale Basadi", "lat": 13.5049, "lng": 74.7671 }, { "name": "Sri Mookambika Temple, Kollur", "lat": 13.8653, "lng": 74.8157 }, { "name": "Kota Shivarama Karanth (Kota)", "lat": 13.4357, "lng": 74.7335 }, { "name": "Yakshagana of Mandarthi", "lat": 13.5414, "lng": 74.8080 }, { "name": "Sri Chennagiri Rengappa Clock Tower", "lat": 14.4402, "lng": 75.9218 }, { "name": "Coffee Estates of Chikkamagaluru", "lat": 13.3161, "lng": 75.7720 }, { "name": "Sri Vidyasankara Temple", "lat": 13.4150, "lng": 75.2530 }, { "name": "Kalinga - King Cobra (Agumbe)", "lat": 13.5091, "lng": 75.0945 }, { "name": "Kundadri Shri Parshwanatha Basadi", "lat": 13.5583, "lng": 75.1666 }, { "name": "Kavi Shaila", "lat": 13.8969, "lng": 75.4053 }, { "name": "Jog Falls", "lat": 14.2301, "lng": 74.8118 }, { "name": "Sri Hombuja Jain Math", "lat": 13.8341, "lng": 75.1950 }, { "name": "Onake Obavva (Chitradurga Fort)", "lat": 14.2259, "lng": 76.3983 }, { "name": "Bendre Bhavan", "lat": 15.4746, "lng": 75.0118 }, { "name": "Unkal Lake", "lat": 15.3852, "lng": 74.9892 }, { "name": "Black Buck Sanctuary", "lat": 14.6732, "lng": 75.6881 }, { "name": "Sri Sharifa Shivayogi and Guru Govind Shivayogi", "lat": 14.8989, "lng": 75.4389 }, { "name": "Symbols of Sri Venkataramana Temple", "lat": 14.7709, "lng": 74.4539 }, { "name": "Lord Shiva (Murudeshwar)", "lat": 14.0941, "lng": 74.4883 }, { "name": "Kumaravyasa", "lat": 15.4647, "lng": 75.6791 }, { "name": "Brahma Jinalaya", "lat": 15.5186, "lng": 75.7196 }, { "name": "Adikavi Pampa", "lat": 15.5255, "lng": 75.4093 }, { "name": "Ballari Fort", "lat": 15.1485, "lng": 76.9149 }, { "name": "Parvati - Kumaraswamy Temple", "lat": 15.0970, "lng": 76.5772 }, { "name": "Kishkinda: Anjanadri Hill", "lat": 15.3468, "lng": 76.4800 }, { "name": "Sri Gavi Siddeshwar Samsthana Sri Gavimath", "lat": 15.4674, "lng": 76.1554 }, { "name": "Stone Chariot", "lat": 15.3350, "lng": 76.4600 }, { "name": "Sloth Bear-Daroji Bear Sanctuary", "lat": 15.2570, "lng": 76.6570 }, { "name": "Sri Appannacharya Swamiji's House", "lat": 16.0353, "lng": 76.8041 }, { "name": "Bara Gazi Toph", "lat": 17.3323, "lng": 76.8340 }, { "name": "Bonal Bird Sanctuary", "lat": 16.6322, "lng": 76.8967 }, { "name": "Shri 1008 Parshwanath Bhagawan", "lat": 17.8282, "lng": 77.3005 }, { "name": "Anubhava Mantapa", "lat": 17.8228, "lng": 77.0425 }, { "name": "Madrasa of Mohammed Gawan", "lat": 17.9142, "lng": 77.5186 }, { "name": "Guru Nanak Jhira", "lat": 17.9221, "lng": 77.5097 }, { "name": "Gol Gumbaz", "lat": 16.8296, "lng": 75.7351 }, { "name": "Chalukyan Royal Emblem (Aihole)", "lat": 16.0194, "lng": 75.8821 }, { "name": "Lord Nataraja (Badami)", "lat": 15.9181, "lng": 75.6835 }, { "name": "Galaganatha Temple (Pattadakal)", "lat": 15.9482, "lng": 75.8160 }, { "name": "Kittur Rani Chennamma (Belagavi)", "lat": 15.8521, "lng": 74.5167 }, { "name": "Clock Tower of Belgaum", "lat": 15.8550, "lng": 74.5080 }, { "name": "Kamal Basadi", "lat": 15.8596, "lng": 74.5126 }, { "name": "Kittur Rani Chennamma (Kittur)", "lat": 15.6025, "lng": 74.7915 }, { "name": "Krantiveera Sangolli Rayanna", "lat": 15.6669, "lng": 74.4173 }, { "name": "Royal Logo of Kadamba (Halashi)", "lat": 15.5398, "lng": 74.5771 }, { "name": "Panchalingeswar Temple", "lat": 15.7196, "lng": 75.1432 }, { "name": "Sri Renuka Yallamma Devasthan", "lat": 15.8300, "lng": 75.0300 }, { "name": "Bhimgad Wildlife Sanctuary", "lat": 15.5800, "lng": 74.2900 }, { "name": "Gokak Falls", "lat": 16.1950, "lng": 74.8210 }
+        ];
+
+        let map;
+        let infoWindow;
+        let routePoints = [];
+        let directionsService;
+        let directionsRenderer;
+        
+        function initMap() {
+            const karnatakaCenter = { lat: 15.3173, lng: 75.7139 };
+            map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 7,
+                center: karnatakaCenter,
+            });
+            
+            directionsService = new google.maps.DirectionsService();
+            directionsRenderer = new google.maps.DirectionsRenderer();
+            directionsRenderer.setMap(map);
+
+            infoWindow = new google.maps.InfoWindow();
+
+            showCurrentLocation();
+
+            locations.forEach((location, index) => {
+                const marker = new google.maps.Marker({
+                    position: { lat: location.lat, lng: location.lng },
+                    map: map,
+                    title: location.name,
+                });
+
+                marker.addListener("click", () => {
+                    const content = `
+                        <div class="info-window-content">
+                            ${location.name}
+                            <button class="add-route-btn" onclick="addToRoute(${index})">Add to Route</button>
+                            <button class="open-gmaps-btn" onclick="openInGoogleMaps(${location.lat}, ${location.lng})">Open in Google Maps</button>
+                        </div>`;
+                    infoWindow.setContent(content);
+                    infoWindow.open(map, marker);
+                });
+            });
+
+            document.getElementById("calculateRouteBtn").addEventListener("click", calculateAndDisplayRoute);
+        }
+
+        function showCurrentLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        const pos = {
+                            lat: position.coords.latitude,
+                            lng: position.coords.longitude,
+                        };
+                        // <!-- MODIFIED: Added icon property for blue dot -->
+                        new google.maps.Marker({
+                            position: pos,
+                            map,
+                            title: "Your Location",
+                            icon: {
+                                url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+                            }
+                        });
+                        map.setCenter(pos);
+                        map.setZoom(10);
+                    },
+                    () => {
+                        console.log("Error: The Geolocation service failed or was denied.");
+                    }
+                );
+            } else {
+                console.log("Error: Your browser doesn't support geolocation.");
+            }
+        }
+
+        function openInGoogleMaps(lat, lng) {
+            const url = `https://www.google.com/maps/search/?api=1&query=${lat},${lng}`;
+            window.open(url, '_blank');
+        }
+
+        function addToRoute(locationIndex) {
+            const selectedLocation = locations[locationIndex];
+            
+            if (routePoints.find(p => p.name === selectedLocation.name)) {
+                alert(selectedLocation.name + " is already in the route.");
+                return;
+            }
+
+            routePoints.push(selectedLocation);
+            updateSelectedLocationsList();
+            infoWindow.close();
+        }
+
+        function updateSelectedLocationsList() {
+            const listElement = document.getElementById("selectedLocationsList");
+            listElement.innerHTML = "";
+
+            routePoints.forEach(point => {
+                const listItem = document.createElement("li");
+                listItem.textContent = point.name;
+                listElement.appendChild(listItem);
+            });
+            
+            const calcBtn = document.getElementById("calculateRouteBtn");
+            if (routePoints.length >= 2) {
+                calcBtn.disabled = false;
+            } else {
+                calcBtn.disabled = true;
+            }
+        }
+
+        function calculateAndDisplayRoute() {
+            if (routePoints.length < 2) {
+                alert("Please select at least two locations to calculate a route.");
+                return;
+            }
+            
+            directionsRenderer.setDirections({routes: []});
+            
+            const waypoints = [];
+            for (let i = 1; i < routePoints.length - 1; i++) {
+                waypoints.push({
+                    location: new google.maps.LatLng(routePoints[i].lat, routePoints[i].lng),
+                    stopover: true,
+                });
+            }
+
+            const request = {
+                origin: new google.maps.LatLng(routePoints[0].lat, routePoints[0].lng),
+                destination: new google.maps.LatLng(routePoints[routePoints.length - 1].lat, routePoints[routePoints.length - 1].lng),
+                waypoints: waypoints,
+                optimizeWaypoints: true,
+                travelMode: google.maps.TravelMode.DRIVING,
+            };
+
+            directionsService.route(request, (result, status) => {
+                if (status == "OK") {
+                    directionsRenderer.setDirections(result);
+                } else {
+                    window.alert("Directions request failed due to " + status);
+                }
+            });
+        }
+    </script>
+
+    <!-- The Google Maps script tag. IMPORTANT: Replace YOUR_GOOGLE_MAPS_API_KEY -->
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCCypgdq5pg0nb8poCOAC7DCkTYLTRXo2I&callback=initMap">
+    </script>
+</body>
+</html>
