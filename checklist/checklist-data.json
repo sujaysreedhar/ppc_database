@@ -1797,7 +1797,7 @@
         "pincode": 571201,
         "post_office": "Madikeri HO",
         "district": "Kodagu",
-        "collected": false
+        "collected": true
     },
     {
         "id": 226,
@@ -1901,7 +1901,7 @@
         "pincode": 574105,
         "post_office": "Katapadi SO",
         "district": "Udupi",
-        "collected": false
+        "collected": true
     },
     {
         "id": 239,
@@ -1909,7 +1909,7 @@
         "pincode": 574106,
         "post_office": "Kaup SO",
         "district": "Udupi",
-        "collected": false
+        "collected": true
     },
     {
         "id": 240,
@@ -1973,7 +1973,7 @@
         "pincode": 575001,
         "post_office": "Mangaluru HO-PB",
         "district": "Dakshina Kannada",
-        "collected": false
+        "collected": true
     },
     {
         "id": 248,
@@ -1981,7 +1981,7 @@
         "pincode": 575020,
         "post_office": "Ullal SO",
         "district": "Dakshina Kannada",
-        "collected": false
+        "collected": true
     },
     {
         "id": 249,
@@ -1989,7 +1989,7 @@
         "pincode": 576101,
         "post_office": "Udupi HO",
         "district": "Udupi",
-        "collected": false
+        "collected": true
     },
     {
         "id": 250,
@@ -2005,7 +2005,7 @@
         "pincode": 576108,
         "post_office": "Malpe SO",
         "district": "Udupi",
-        "collected": false
+        "collected": true
     },
     {
         "id": 252,
@@ -2877,7 +2877,7 @@
         "pincode": 671124,
         "post_office": "Madhur BO",
         "district": "Kasargod",
-        "collected": false
+        "collected": true
     },
     {
         "id": 361,
