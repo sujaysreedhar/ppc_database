@@ -7,28 +7,252 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <style>
-        .card-img-top { width: 100%; height: 200px; object-fit: cover; }
-        .ppc-card { transition: transform 0.2s ease-in-out; }
-        .ppc-card:hover { transform: translateY(-5px); }
+        :root {
+            color-scheme: light;
+        }
+
+        body {
+            background-color: #f3f6fb;
+            color: #1f2937;
+            font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+        }
+
+        .navbar {
+            box-shadow: 0 16px 32px rgba(15, 23, 42, 0.08);
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            letter-spacing: 0.03em;
+        }
+
+        header.hero {
+            position: relative;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.12), rgba(79, 70, 229, 0.12));
+            overflow: hidden;
+        }
+
+        header.hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at top right, rgba(129, 140, 248, 0.35), transparent 55%),
+                        radial-gradient(circle at bottom left, rgba(59, 130, 246, 0.25), transparent 45%);
+            pointer-events: none;
+        }
+
+        header.hero .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-title {
+            font-weight: 800;
+            letter-spacing: -0.02em;
+        }
+
+        .search-wrapper {
+            background: #ffffff;
+            border-radius: 1rem;
+            padding: 0.75rem 1rem;
+            box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+        }
+
+        .search-wrapper .input-group-text {
+            background: transparent;
+            border: none;
+            color: #6366f1;
+            font-size: 1.25rem;
+        }
+
+        .search-wrapper .form-control {
+            border: none;
+            box-shadow: none !important;
+            font-size: 1.05rem;
+        }
+
+        .search-wrapper .form-control::placeholder {
+            color: #9ca3af;
+        }
+
+        .collection-overview {
+            background: #ffffff;
+            border-radius: 1.25rem;
+            padding: 2.5rem 2rem;
+            box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+        }
+
+        .collection-overview p.lead {
+            color: #4b5563;
+        }
+
+        .stat-card {
+            border-radius: 1rem;
+            padding: 1.5rem;
+            background: linear-gradient(160deg, rgba(79, 70, 229, 0.12), rgba(59, 130, 246, 0.05));
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(79, 70, 229, 0.16);
+        }
+
+        .stat-value {
+            display: block;
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: #312e81;
+        }
+
+        .stat-label {
+            display: block;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            font-size: 0.85rem;
+            color: #4b5563;
+        }
+
+        .ppc-card {
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+
+        .ppc-card .card {
+            border: none;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .ppc-card:hover .card {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 36px rgba(30, 64, 175, 0.14);
+        }
+
+        .card-img-top {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            cursor: zoom-in;
+        }
+
+        .badge.bg-primary {
+            background: linear-gradient(120deg, #6366f1, #4338ca) !important;
+        }
+
+        .badge.bg-secondary {
+            background: linear-gradient(120deg, #f59e0b, #d97706) !important;
+        }
+
+        #resultsCount {
+            font-size: 0.95rem;
+        }
+
+        #paginationControls .pagination {
+            gap: 0.25rem;
+        }
+
+        #paginationControls .page-link {
+            border-radius: 999px !important;
+            color: #1f2937;
+            border: none;
+            box-shadow: 0 6px 16px rgba(15, 23, 42, 0.08);
+        }
+
+        #paginationControls .page-item.active .page-link {
+            background: linear-gradient(120deg, #6366f1, #4338ca);
+            color: #ffffff;
+            box-shadow: 0 10px 24px rgba(79, 70, 229, 0.35);
+        }
+
+        .lightbox-trigger:focus-visible {
+            outline: 3px solid rgba(99, 102, 241, 0.6);
+            outline-offset: 4px;
+        }
+
+        .modal-lightbox .modal-content {
+            border: none;
+            border-radius: 1rem;
+            box-shadow: 0 25px 60px rgba(15, 23, 42, 0.35);
+        }
+
+        @media (max-width: 767.98px) {
+            .card-img-top {
+                height: 200px;
+            }
+
+            .collection-overview {
+                padding: 2rem 1.5rem;
+            }
+
+            .stat-card {
+                padding: 1.25rem;
+            }
+        }
     </style>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-        <div class="container"><a class="navbar-brand" href="#"><i class="bi bi-envelope-paper-heart-fill"></i> PPC Catalog</a></div>
+        <div class="container d-flex flex-wrap justify-content-between align-items-center gap-3">
+            <a class="navbar-brand" href="#"><i class="bi bi-envelope-paper-heart-fill me-2"></i>PPC Catalog</a>
+            <span class="text-white-50 small fst-italic">Archiving stories, one postcard at a time</span>
+        </div>
     </nav>
-    <header class="py-5 bg-light border-bottom mb-4">
+    <header class="hero py-5 border-bottom">
         <div class="container">
-            <div class="text-center my-4">
-                <h1 class="fw-bolder display-5">The PPC Collection of Sujay Sreedhar</h1>
-                <p class="lead mb-0">A catalog of my private collection of Permanent Pictorial Cancellations.</p>
+            <div class="row justify-content-center text-center">
+                <div class="col-lg-9 col-xl-8">
+                    <h1 class="fw-bolder display-5 hero-title">The PPC Collection of Sujay Sreedhar</h1>
+                    <p class="lead mb-4">Browse decades of Permanent Pictorial Cancellations and special commemorations. Use the enhanced search, pagination, and lightbox gallery to discover every story behind the stamps.</p>
+                </div>
             </div>
-             <div class="col-md-8 offset-md-2">
-                <div class="input-group"><span class="input-group-text"><i class="bi bi-search"></i></span><input type="text" id="searchInput" class="form-control form-control-lg" placeholder="Search by title, location, year, origin..."></div>
-                <div id="resultsCount" class="text-center text-muted mt-2"></div>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="search-wrapper">
+                        <div class="input-group align-items-center">
+                            <span class="input-group-text"><i class="bi bi-search"></i></span>
+                            <input type="text" id="searchInput" class="form-control" placeholder="Search by title, location, year, origin...">
+                        </div>
+                    </div>
+                    <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mt-2">
+                        <div id="resultsCount" class="text-muted small"></div>
+                        <button type="button" id="clearSearchBtn" class="btn btn-outline-secondary btn-sm d-none"><i class="bi bi-x-circle me-1"></i>Clear search</button>
+                    </div>
+                </div>
             </div>
         </div>
     </header>
-    <main class="container">
+    <main class="container py-5">
+        <section class="collection-overview mb-5" id="collectionOverview">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h2 class="h4 text-uppercase text-muted mb-3">Explore the archive</h2>
+                    <p class="lead mb-4">A living catalog that celebrates philately, heritage, and the artists who bring these cancellations to life. Keep scrolling or search to reveal every postcard in the collection.</p>
+                </div>
+            </div>
+            <div class="row g-4 justify-content-center" id="collectionStats">
+                <div class="col-12 col-sm-6 col-lg-4">
+                    <div class="stat-card h-100">
+                        <span class="stat-value" id="statTotalEntries">0</span>
+                        <span class="stat-label">Entries catalogued</span>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-4">
+                    <div class="stat-card h-100">
+                        <span class="stat-value" id="statYearRange">—</span>
+                        <span class="stat-label">Year span</span>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-4">
+                    <div class="stat-card h-100">
+                        <span class="stat-value" id="statUniqueLocations">0</span>
+                        <span class="stat-label">Locations represented</span>
+                    </div>
+                </div>
+            </div>
+        </section>
         <div id="ppcGrid" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
                                     <div class="col ppc-card" data-search-content="achanakmar tiger reserve (atr) - tiger achanakmar - 495113 2025 chhattisgarh permanent india ">
                 <div class="card h-100 shadow-sm">
@@ -604,28 +828,238 @@
                     </div>
                 </div>
             </div>
-                    </div>
+        </div>
+        <nav id="paginationControls" class="mt-4" aria-label="Collection pagination"></nav>
     </main>
-    <footer class="text-center py-4 bg-dark text-white mt-5"><p class="mb-0">© 2025 Sujay Sreedhar</p></footer>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const searchInput = document.getElementById('searchInput');
-    const pccGrid = document.getElementById('ppcGrid');
-    const allCards = Array.from(pccGrid.getElementsByClassName('ppc-card'));
-    const resultsCount = document.getElementById('resultsCount');
-    function handleSearch() {
-        const query = searchInput.value.toLowerCase().trim();
-        let visibleCount = 0;
-        allCards.forEach(card => {
-            const isVisible = card.getAttribute('data-search-content').includes(query);
-            card.style.display = isVisible ? '' : 'none';
-            if(isVisible) visibleCount++;
+    <footer class="text-center py-4 bg-dark text-white mt-5">
+        <p class="mb-1">© 2025 Sujay Sreedhar</p>
+        <p class="text-white-50 small mb-0">Curated with love for fellow philatelists.</p>
+    </footer>
+
+    <div class="modal fade modal-lightbox" id="imageLightbox" tabindex="-1" aria-labelledby="lightboxTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content bg-dark text-white">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title" id="lightboxTitle"></h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <img id="lightboxImage" src="" alt="" class="img-fluid rounded shadow" />
+                    <p id="lightboxCaption" class="text-white-50 small mt-3 mb-0"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const searchInput = document.getElementById('searchInput');
+            const clearSearchBtn = document.getElementById('clearSearchBtn');
+            const ppcGrid = document.getElementById('ppcGrid');
+            const allCards = Array.from(ppcGrid.getElementsByClassName('ppc-card'));
+            const resultsCount = document.getElementById('resultsCount');
+            const paginationControls = document.getElementById('paginationControls');
+            const statTotalEntries = document.getElementById('statTotalEntries');
+            const statYearRange = document.getElementById('statYearRange');
+            const statUniqueLocations = document.getElementById('statUniqueLocations');
+            const cardsPerPage = 12;
+            let filteredCards = [...allCards];
+            let currentPage = 1;
+
+            function hydrateStats() {
+                if (!statTotalEntries || !statYearRange || !statUniqueLocations) {
+                    return;
+                }
+                const years = [];
+                const locations = new Set();
+                allCards.forEach(card => {
+                    const yearBadge = card.querySelector('.badge.bg-secondary');
+                    if (yearBadge) {
+                        const parsedYear = parseInt(yearBadge.textContent.trim(), 10);
+                        if (!Number.isNaN(parsedYear)) {
+                            years.push(parsedYear);
+                        }
+                    }
+                    const locationElement = card.querySelector('.card-text');
+                    if (locationElement) {
+                        locations.add(locationElement.textContent.replace(/\s+/g, ' ').trim());
+                    }
+                });
+                statTotalEntries.textContent = allCards.length;
+                if (years.length) {
+                    const minYear = Math.min(...years);
+                    const maxYear = Math.max(...years);
+                    statYearRange.textContent = minYear === maxYear ? `${minYear}` : `${minYear} – ${maxYear}`;
+                } else {
+                    statYearRange.textContent = '—';
+                }
+                statUniqueLocations.textContent = locations.size;
+            }
+
+            function updateClearButton() {
+                if (!clearSearchBtn) {
+                    return;
+                }
+                clearSearchBtn.classList.toggle('d-none', searchInput.value.trim() === '');
+            }
+
+            function updateResultsCount(totalPages) {
+                if (!resultsCount) {
+                    return;
+                }
+                if (!filteredCards.length) {
+                    resultsCount.textContent = 'No entries match your search. Try a different keyword.';
+                    return;
+                }
+                const start = (currentPage - 1) * cardsPerPage + 1;
+                const end = Math.min(start + cardsPerPage - 1, filteredCards.length);
+                const filteredNotice = filteredCards.length === allCards.length ? '' : ` (filtered from ${allCards.length})`;
+                resultsCount.textContent = `Showing ${start} – ${end} of ${filteredCards.length} entries${filteredNotice}. Page ${currentPage} of ${totalPages}.`;
+            }
+
+            function renderPagination(totalPages) {
+                if (!paginationControls) {
+                    return;
+                }
+                paginationControls.innerHTML = '';
+                if (filteredCards.length === 0 || totalPages <= 1) {
+                    paginationControls.classList.add('d-none');
+                    return;
+                }
+                paginationControls.classList.remove('d-none');
+                const paginationList = document.createElement('ul');
+                paginationList.className = 'pagination justify-content-center flex-wrap mb-0';
+
+                const createItem = (label, page, disabled = false, active = false) => {
+                    const listItem = document.createElement('li');
+                    listItem.className = 'page-item';
+                    if (disabled) {
+                        listItem.classList.add('disabled');
+                    }
+                    if (active) {
+                        listItem.classList.add('active');
+                    }
+                    const button = document.createElement('button');
+                    button.type = 'button';
+                    button.className = 'page-link';
+                    button.textContent = label;
+                    if (!disabled) {
+                        button.addEventListener('click', () => {
+                            currentPage = Math.min(Math.max(page, 1), totalPages);
+                            updateView();
+                            const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+                            ppcGrid.scrollIntoView({ behavior, block: 'start' });
+                        });
+                    }
+                    listItem.appendChild(button);
+                    return listItem;
+                };
+
+                paginationList.appendChild(createItem('Prev', currentPage - 1, currentPage === 1));
+                for (let page = 1; page <= totalPages; page += 1) {
+                    paginationList.appendChild(createItem(`${page}`, page, false, page === currentPage));
+                }
+                paginationList.appendChild(createItem('Next', currentPage + 1, currentPage === totalPages));
+                paginationControls.appendChild(paginationList);
+            }
+
+            function updateView() {
+                const totalPages = Math.max(1, Math.ceil(filteredCards.length / cardsPerPage));
+                currentPage = Math.min(currentPage, totalPages);
+                allCards.forEach(card => {
+                    card.classList.add('d-none');
+                });
+                filteredCards.forEach((card, index) => {
+                    const pageIndex = Math.floor(index / cardsPerPage) + 1;
+                    if (pageIndex === currentPage) {
+                        card.classList.remove('d-none');
+                    }
+                });
+                updateResultsCount(totalPages);
+                renderPagination(totalPages);
+            }
+
+            function handleSearchInput() {
+                const query = searchInput.value.toLowerCase().trim();
+                if (!query) {
+                    filteredCards = [...allCards];
+                } else {
+                    filteredCards = allCards.filter(card => {
+                        const content = card.dataset.searchContent || card.getAttribute('data-search-content') || '';
+                        return content.toLowerCase().includes(query);
+                    });
+                }
+                currentPage = 1;
+                updateClearButton();
+                updateView();
+            }
+
+            function setupLightbox() {
+                const modalElement = document.getElementById('imageLightbox');
+                if (!modalElement || typeof bootstrap === 'undefined') {
+                    return;
+                }
+                const lightboxImage = document.getElementById('lightboxImage');
+                const lightboxTitle = document.getElementById('lightboxTitle');
+                const lightboxCaption = document.getElementById('lightboxCaption');
+                const modalInstance = new bootstrap.Modal(modalElement);
+
+                modalElement.addEventListener('hidden.bs.modal', () => {
+                    if (lightboxImage) {
+                        lightboxImage.src = '';
+                        lightboxImage.alt = '';
+                    }
+                });
+
+                allCards.forEach(card => {
+                    const image = card.querySelector('.card-img-top');
+                    if (!image) {
+                        return;
+                    }
+                    image.classList.add('lightbox-trigger');
+                    image.setAttribute('role', 'button');
+                    image.setAttribute('tabindex', '0');
+                    const title = card.querySelector('.card-title')?.textContent.trim() ?? '';
+                    const location = card.querySelector('.card-text')?.textContent.replace(/\s+/g, ' ').trim() ?? '';
+
+                    const openModal = () => {
+                        if (lightboxImage) {
+                            lightboxImage.src = image.getAttribute('src') ?? '';
+                            lightboxImage.alt = image.getAttribute('alt') || title;
+                        }
+                        if (lightboxTitle) {
+                            lightboxTitle.textContent = title;
+                        }
+                        if (lightboxCaption) {
+                            lightboxCaption.textContent = location;
+                        }
+                        modalInstance.show();
+                    };
+
+                    image.addEventListener('click', openModal);
+                    image.addEventListener('keydown', event => {
+                        if (event.key === 'Enter' || event.key === ' ') {
+                            event.preventDefault();
+                            openModal();
+                        }
+                    });
+                });
+            }
+
+            hydrateStats();
+            searchInput.addEventListener('input', handleSearchInput);
+            if (clearSearchBtn) {
+                clearSearchBtn.addEventListener('click', () => {
+                    searchInput.value = '';
+                    searchInput.focus();
+                    handleSearchInput();
+                });
+            }
+
+            handleSearchInput();
+            setupLightbox();
         });
-        resultsCount.textContent = `${visibleCount} of ${allCards.length} entries shown.`;
-    }
-    searchInput.addEventListener('input', handleSearch);
-    handleSearch(); // Initial count
-});
-</script>
+    </script>
 </body>
 </html>
