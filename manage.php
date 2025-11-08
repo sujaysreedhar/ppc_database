@@ -341,22 +341,66 @@ function regenerate_entry_pages($entries) {
                 <h1 class="fw-bolder display-5">The PPC Collection of <?= OWNER_NAME ?></h1>
                 <p class="lead mb-0">A catalog of my private collection of Permanent Pictorial Cancellations.</p>
             </div>
-             <div class="col-md-8 offset-md-2">
-                <div class="input-group"><span class="input-group-text"><i class="bi bi-search"></i></span><input type="text" id="searchInput" class="form-control form-control-lg" placeholder="Search by title, location, year, origin..."></div>
-                <div id="resultsCount" class="text-center text-muted mt-2"></div>
+            <div class="row justify-content-center g-3">
+                <div class="col-lg-6">
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-search"></i></span>
+                        <input type="text" id="searchInput" class="form-control form-control-lg" placeholder="Search by title, location, year, origin...">
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="d-flex flex-wrap justify-content-center gap-2" id="typeFilters">
+                        <?php $filterTypes = ['PPC', 'Special', 'Picture Postcard', 'Cover']; ?>
+                        <?php foreach ($filterTypes as $filterType): ?>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="filter-<?= strtolower(str_replace(' ', '-', $filterType)) ?>" name="typeFilter" value="<?= htmlspecialchars($filterType) ?>">
+                            <label class="form-check-label" for="filter-<?= strtolower(str_replace(' ', '-', $filterType)) ?>"><?= htmlspecialchars($filterType) ?></label>
+                        </div>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+                <div class="col-12 text-center">
+                    <div id="resultsCount" class="text-muted"></div>
+                </div>
             </div>
         </div>
     </header>
-    <main class="container">
+    <main class="container pb-5">
         <div id="ppcGrid" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
             <?php foreach ($entries as $entry): ?>
-            <?php $search_content = strtolower(implode(' ', [$entry['title'], $entry['location'], $entry['year'], $entry['region'], $entry['type'], $entry['origin'], $entry['source']])); ?>
-            <div class="col ppc-card" data-search-content="<?= htmlspecialchars($search_content) ?>">
+            <?php
+                $search_content = strtolower(implode(' ', [
+                    $entry['title'],
+                    $entry['location'],
+                    $entry['year'],
+                    $entry['region'],
+                    $entry['type'],
+                    $entry['origin'],
+                    $entry['source']
+                ]));
+                $type_list = array_filter(array_map('trim', preg_split('/[;,]+/', $entry['type'] ?? '')));
+                $type_data = implode('|', $type_list);
+            ?>
+            <div class="col ppc-card" data-search-content="<?= htmlspecialchars($search_content) ?>" data-types="<?= htmlspecialchars($type_data ?: 'Unspecified') ?>">
                 <div class="card h-100 shadow-sm">
-                    <img src="assets/images/<?= htmlspecialchars($entry['image']) ?>" class="card-img-top" alt="<?= htmlspecialchars($entry['title']) ?>">
+                    <div class="position-relative">
+                        <img src="assets/images/<?= htmlspecialchars($entry['image']) ?>" class="card-img-top ppc-card-image" alt="<?= htmlspecialchars($entry['title']) ?>" loading="lazy">
+                        <button type="button" class="btn btn-light btn-sm position-absolute top-0 end-0 m-2 view-image-btn" aria-label="View larger image">
+                            <i class="bi bi-arrows-fullscreen"></i>
+                        </button>
+                    </div>
                     <div class="card-body d-flex flex-column">
                         <h5 class="card-title"><?= htmlspecialchars($entry['title']) ?></h5>
-                        <p class="card-text text-muted small"><i class="bi bi-geo-alt"></i> <?= htmlspecialchars($entry['location']) ?></p>
+                        <p class="card-text text-muted small mb-2"><i class="bi bi-geo-alt"></i> <?= htmlspecialchars($entry['location']) ?></p>
+                        <div class="mb-2">
+                            <?php if (!empty($type_list)): ?>
+                                <?php foreach ($type_list as $type_badge): ?>
+                                    <span class="badge bg-info text-dark me-1 mb-1"><?= htmlspecialchars($type_badge) ?></span>
+                                <?php endforeach; ?>
+                            <?php else: ?>
+                                <span class="badge bg-light text-secondary">Unspecified</span>
+                            <?php endif; ?>
+                        </div>
                         <div class="mt-auto pt-2">
                             <span class="badge bg-primary me-1"><?= htmlspecialchars($entry['origin']) ?></span>
                             <span class="badge bg-secondary me-2"><?= htmlspecialchars($entry['year']) ?></span>
@@ -367,26 +411,148 @@ function regenerate_entry_pages($entries) {
             </div>
             <?php endforeach; ?>
         </div>
+        <nav aria-label="PPC pagination" class="mt-4">
+            <ul class="pagination justify-content-center flex-wrap" id="pagination"></ul>
+        </nav>
     </main>
-    <footer class="text-center py-4 bg-dark text-white mt-5"><p class="mb-0">© <?= date('Y') ?> <?= OWNER_NAME ?></p></footer>
+    <footer class="text-center py-4 bg-dark text-white mt-auto"><p class="mb-0">© <?= date('Y') ?> <?= OWNER_NAME ?></p></footer>
+    <div class="modal fade" id="lightboxModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content bg-transparent border-0">
+                <div class="modal-body p-0 position-relative bg-dark rounded-3 overflow-hidden">
+                    <button type="button" class="btn-close btn-close-white position-absolute top-0 end-0 m-3" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <img id="lightboxImage" src="" alt="Selected postcard" class="img-fluid w-100">
+                    <div class="p-3 text-center text-white" id="lightboxTitle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const searchInput = document.getElementById('searchInput');
     const pccGrid = document.getElementById('ppcGrid');
     const allCards = Array.from(pccGrid.getElementsByClassName('ppc-card'));
     const resultsCount = document.getElementById('resultsCount');
-    function handleSearch() {
-        const query = searchInput.value.toLowerCase().trim();
-        let visibleCount = 0;
-        allCards.forEach(card => {
-            const isVisible = card.getAttribute('data-search-content').includes(query);
-            card.style.display = isVisible ? '' : 'none';
-            if(isVisible) visibleCount++;
+    const pagination = document.getElementById('pagination');
+    const typeCheckboxes = Array.from(document.querySelectorAll('input[name="typeFilter"]'));
+    const entriesPerPage = 12;
+    let filteredCards = allCards;
+    let currentPage = 1;
+
+    const lightboxModal = new bootstrap.Modal(document.getElementById('lightboxModal'));
+    const lightboxImage = document.getElementById('lightboxImage');
+    const lightboxTitle = document.getElementById('lightboxTitle');
+
+    pccGrid.querySelectorAll('.ppc-card-image').forEach((image) => {
+        image.addEventListener('click', (event) => {
+            event.preventDefault();
+            const card = event.target.closest('.ppc-card');
+            openLightbox(card, image);
         });
-        resultsCount.textContent = `${visibleCount} of ${allCards.length} entries shown.`;
+    });
+
+    pccGrid.querySelectorAll('.view-image-btn').forEach((button) => {
+        button.addEventListener('click', (event) => {
+            event.preventDefault();
+            const card = event.target.closest('.ppc-card');
+            const image = card.querySelector('.ppc-card-image');
+            openLightbox(card, image);
+        });
+    });
+
+    function openLightbox(card, image) {
+        lightboxImage.src = image.getAttribute('src');
+        lightboxImage.alt = image.getAttribute('alt');
+        const titleElement = card.querySelector('.card-title');
+        lightboxTitle.textContent = titleElement ? titleElement.textContent : '';
+        lightboxModal.show();
     }
-    searchInput.addEventListener('input', handleSearch);
-    handleSearch(); // Initial count
+
+    function getCardTypes(card) {
+        return card.getAttribute('data-types')
+            .split('|')
+            .map(type => type.trim())
+            .filter(type => type.length > 0);
+    }
+
+    function updateResults() {
+        const query = searchInput.value.toLowerCase().trim();
+        const selectedTypes = typeCheckboxes.filter(checkbox => checkbox.checked).map(checkbox => checkbox.value);
+
+        filteredCards = allCards.filter(card => {
+            const matchesQuery = card.getAttribute('data-search-content').includes(query);
+            if (!matchesQuery) {
+                return false;
+            }
+
+            if (selectedTypes.length === 0) {
+                return true;
+            }
+
+            const cardTypes = getCardTypes(card);
+            if (cardTypes.length === 0) {
+                return false;
+            }
+
+            return selectedTypes.some(type => cardTypes.includes(type));
+        });
+
+        currentPage = 1;
+        renderPage();
+    }
+
+    function renderPage() {
+        const totalCards = filteredCards.length;
+        const totalPages = Math.max(1, Math.ceil(totalCards / entriesPerPage));
+        if (currentPage > totalPages) {
+            currentPage = totalPages;
+        }
+
+        allCards.forEach(card => {
+            card.style.display = 'none';
+        });
+
+        filteredCards.forEach((card, index) => {
+            const page = Math.floor(index / entriesPerPage) + 1;
+            card.style.display = page === currentPage ? '' : 'none';
+        });
+
+        resultsCount.textContent = `${totalCards} of ${allCards.length} entries shown. Page ${currentPage} of ${Math.max(totalPages, 1)}.`;
+        buildPagination(totalPages);
+    }
+
+    function buildPagination(totalPages) {
+        pagination.innerHTML = '';
+        const createItem = (label, page, disabled = false, active = false) => {
+            const li = document.createElement('li');
+            li.className = `page-item${disabled ? ' disabled' : ''}${active ? ' active' : ''}`;
+            const a = document.createElement('a');
+            a.className = 'page-link';
+            a.href = '#';
+            a.textContent = label;
+            a.addEventListener('click', (event) => {
+                event.preventDefault();
+                if (!disabled && currentPage !== page) {
+                    currentPage = page;
+                    renderPage();
+                }
+            });
+            li.appendChild(a);
+            return li;
+        };
+
+        pagination.appendChild(createItem('Prev', currentPage - 1, currentPage === 1));
+        for (let page = 1; page <= totalPages; page++) {
+            pagination.appendChild(createItem(page, page, false, page === currentPage));
+        }
+        pagination.appendChild(createItem('Next', currentPage + 1, currentPage === totalPages));
+    }
+
+    searchInput.addEventListener('input', updateResults);
+    typeCheckboxes.forEach(checkbox => checkbox.addEventListener('change', updateResults));
+
+    updateResults();
 });
 </script>
 </body>
