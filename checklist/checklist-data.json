@@ -941,7 +941,7 @@
         "pincode": 403001,
         "post_office": "Panaji HO-PB",
         "district": "North Goa",
-        "collected": false
+        "collected": true
     },
     {
         "id": 138,
@@ -957,7 +957,7 @@
         "pincode": 403114,
         "post_office": "Reis Magos SO",
         "district": "North Goa",
-        "collected": false
+        "collected": true
     },
     {
         "id": 140,
@@ -1005,7 +1005,7 @@
         "pincode": 403515,
         "post_office": "Candolim SO",
         "district": "North Goa",
-        "collected": false
+        "collected": true
     },
     {
         "id": 146,
@@ -1013,7 +1013,7 @@
         "pincode": 403601,
         "post_office": "Margao HO",
         "district": "South Goa",
-        "collected": false
+        "collected": true
     },
     {
         "id": 147,
@@ -1437,7 +1437,7 @@
         "pincode": 497442,
         "post_office": "Manendragarh SO",
         "district": "\u00a0Manendragarh-Chirmiri-Bharatpur (MCB)",
-        "collected": false
+        "collected": true
     },
     {
         "id": 181,
@@ -1869,7 +1869,7 @@
         "pincode": 573115,
         "post_office": "Belur SO",
         "district": "Hassan",
-        "collected": false
+        "collected": true
     },
     {
         "id": 235,
@@ -1877,7 +1877,7 @@
         "pincode": 573121,
         "post_office": "Halebeedu SO",
         "district": "Hassan",
-        "collected": false
+        "collected": true
     },
     {
         "id": 236,
@@ -2085,7 +2085,7 @@
         "pincode": 577101,
         "post_office": "Chikkamagaluru HO",
         "district": "Chikkamagaluru",
-        "collected": false
+        "collected": true
     },
     {
         "id": 262,
@@ -2189,7 +2189,7 @@
         "pincode": 581350,
         "post_office": "Murudeshwar SO",
         "district": "Uttara Kannada",
-        "collected": false
+        "collected": true
     },
     {
         "id": 275,
@@ -2277,7 +2277,7 @@
         "pincode": 585101,
         "post_office": "Kalaburagi HO",
         "district": "Kalaburagi",
-        "collected": false
+        "collected": true
     },
     {
         "id": 286,
@@ -3005,7 +3005,7 @@
         "pincode": 680101,
         "post_office": "Guruvayur SO",
         "district": "Thrissur",
-        "collected": true
+        "collected": false
     },
     {
         "id": 377,
@@ -3157,7 +3157,7 @@
         "pincode": 695141,
         "post_office": "Varkala SO",
         "district": "Thiruvananthapuram",
-        "collected": false
+        "collected": true
     },
     {
         "id": 396,
@@ -3373,7 +3373,7 @@
         "pincode": 744101,
         "post_office": "Port Blair HO",
         "district": "South Andamans",
-        "collected": false
+        "collected": true
     },
     {
         "id": 423,
